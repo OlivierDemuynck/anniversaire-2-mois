@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a0a2e">
+<title>Pour toi, mon cœur 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Animation d'ouverture : bouquet qui pousse (1 fleur = 1 mois) -->
+<div id="opening-overlay" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:flex-end;justify-content:center;transition:opacity 1s ease;background:var(--bg-base,#0d0515);overflow:hidden;perspective:1000px;">
+  <div id="opening-bg" style="position:absolute;inset:0;z-index:0;"></div>
+  <div id="opening-stars" style="position:absolute;inset:0;z-index:1;overflow:hidden;"></div>
+  <div id="bouquet-container" style="position:relative;z-index:2;width:100%;height:56vh;max-height:400px;transform:scale(0.9);transform-style:preserve-3d;"></div>
+  <div style="position:absolute;left:50%;bottom:8%;transform:translateX(-50%);z-index:2;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:rgba(220,160,190,0.85);white-space:nowrap;animation:fadeIn 1s ease 0.5s both;">Pour toi, mon cœur…</div>
+</div>
+<style>
+  @keyframes fadeIn { 0% { opacity: 0; transform: translate(-50%,8px); } 100% { opacity: 1; transform: translate(-50%,0); } }
+  #opening-bg {
+    filter: blur(0.5px);
+    background-image:
+      radial-gradient(ellipse at top, transparent 0%, var(--bg-base,#0d0515)),
+      radial-gradient(ellipse at bottom, var(--bg-base,#0d0515), rgba(var(--c1,210,100,150),0.18)),
+      repeating-linear-gradient(220deg, rgba(0,0,0,0.5) 0px, rgba(0,0,0,0.5) 19px, transparent 19px, transparent 22px),
+      repeating-linear-gradient(148deg, rgba(0,0,0,0.5) 0px, rgba(0,0,0,0.5) 19px, transparent 19px, transparent 22px),
+      linear-gradient(90deg, rgba(var(--c1,210,100,150),0.5), rgba(var(--c2,160,90,210),0.35));
+  }
+  .opening-star {
+    position: absolute; border-radius: 50%;
+    background: rgba(255,255,255,0.8);
+    animation: starTwinkle ease-in-out infinite;
+  }
+  @keyframes starTwinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.9; } }
+
+  /* ── Fleur façon CodePen : tige + pétales en 3D + cœur + lumières ── */
+  .bq-flower { position: absolute; bottom: 6%; transform-origin: bottom center; transform-style: preserve-3d; animation: bqSway 4s ease-in-out infinite; }
+  @keyframes bqSway { 0%,100% { transform: rotate(var(--rot,0deg)); } 50% { transform: rotate(calc(var(--rot,0deg) + 2deg)); } }
+
+  .bq-line {
+    width: 3px; background-image: linear-gradient(to top, transparent 5%, rgba(110,175,100,0.9), rgba(150,200,120,0.9));
+    box-shadow: inset 0 0 2px rgba(0,0,0,0.5); border-radius: 2px;
+    animation: bqGrow 1s var(--delay,0s) backwards;
+  }
+  @keyframes bqGrow { 0% { height: 0 !important; } }
+
+  .bq-bloom { position: relative; transform-style: preserve-3d; animation: bqBloomPop 0.8s var(--bloomDelay,0.6s) backwards; }
+  @keyframes bqBloomPop { 0% { transform: scale(0); } }
+
+  .bq-petal {
+    position: absolute; bottom: 0; left: 50%; border-radius: 51% 49% 47% 53% / 44% 45% 55% 69%;
+    background-image: linear-gradient(to top, rgba(var(--pc,210,100,150),0.75), rgba(var(--pc,210,100,150),1));
+    box-shadow: inset 0 0 1.4em rgba(255,255,255,0.35);
+    opacity: 0.95;
+  }
+  .bq-petal--1 { transform: translate(-60%, 1%) rotateY(40deg) rotateX(-50deg); }
+  .bq-petal--2 { transform: translate(-50%, -4%) rotateX(40deg); }
+  .bq-petal--3 { transform: translate(-40%, 0%) rotateY(45deg) rotateX(50deg); }
+  .bq-petal--4 {
+    transform-origin: bottom left;
+    border-radius: 40% 100% 40% 40%;
+    transform: translate(0%, 20%) rotateX(70deg) rotate(-43deg);
+    background-image: linear-gradient(to top, rgba(var(--pc2,225,150,60),0.85), rgba(var(--pc,210,100,150),0.9));
+    z-index: 1; opacity: 0.9;
+  }
+  .bq-center {
+    position: absolute; left: 50%; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff8e0, #ffe9a8 55%, #f6c453 100%);
+    box-shadow: 0 0 6px rgba(255,230,150,0.7);
+  }
+
+  .bq-light {
+    position: absolute; bottom: 0; border-radius: 50%;
+    filter: blur(0.4px);
+    animation: bqLight 4s linear infinite backwards;
+  }
+  @keyframes bqLight {
+    0%   { opacity: 0; transform: translateY(0) translateX(0); }
+    25%  { opacity: 1; transform: translateY(-10px) translateX(-4px); }
+    50%  { opacity: 1; transform: translateY(-24px) translateX(4px); filter: blur(0.6px); }
+    75%  { opacity: 0.7; transform: translateY(-34px) translateX(-3px); filter: blur(0.8px); }
+    100% { opacity: 0; transform: translateY(-46px); filter: blur(1.2px); }
+  }
+
+  .bq-leaf {
+    position: absolute; border-radius: 0 100% 0 100%; background: rgba(110,175,100,0.85);
+    transform-origin: bottom left; opacity: 0;
+    animation: bqLeafGrow 0.6s var(--delay,0s) backwards;
+  }
+  @keyframes bqLeafGrow { 0% { opacity: 0; transform: rotate(var(--lrot,0deg)) scale(0); } 100% { opacity: 1; transform: rotate(var(--lrot,0deg)) scale(1); } }
+</style>
+
+<!-- Toast "Accomplissement obtenu !" façon Minecraft -->
+<div class="mc-toast-wrap"><div class="mc-toast" id="mc-toast"></div></div>
+
+<!-- Pétales (générés en JS selon le mois) -->
+<div id="petals-container"></div>
+<!-- Cœurs flottants -->
+<div id="hearts-container"></div>
+
+<!-- Grandes fleurs décoratives fixes -->
+<svg class="flower-deco" style="top:-30px;left:-30px;opacity:0.26;transform:rotate(-15deg)" width="230" height="230" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <g class="deco-flower" data-color="c1"></g>
+</svg>
+<svg class="flower-deco" style="top:-20px;right:-25px;opacity:0.24;transform:rotate(12deg)" width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <g class="deco-flower" data-color="c2"></g>
+</svg>
+<svg class="flower-deco" style="top:800px;right:-18px;opacity:0.22;transform:rotate(10deg)" width="150" height="190" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <g class="deco-flower-filled" data-color="c1"></g>
+</svg>
+<svg class="flower-deco" style="top:520px;left:-25px;opacity:0.24;transform:rotate(-10deg)" width="180" height="215" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <g class="deco-flower" data-color="c2"></g>
+</svg>
+<svg class="flower-deco" style="top:1150px;right:-20px;opacity:0.22;transform:rotate(14deg)" width="170" height="205" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <g class="deco-flower" data-color="c1"></g>
+</svg>
+
+<div id="old-version-banner" style="display:none;width:100%;max-width:460px;margin:0 auto;padding:10px 20px;text-align:center;position:relative;z-index:2">
+  <a href="index.html" style="font-size:11px;color:rgba(var(--c1),0.85);text-decoration:none;border:1px solid rgba(var(--c1),0.35);padding:7px 16px;border-radius:20px;display:inline-block">
+    ← tu regardes une ancienne version · revenir à aujourd'hui
+  </a>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-flower-top">
+    <svg width="260" height="150" viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
+      <g class="deco-flower-hero-side" data-color="c2" transform="translate(85,42) rotate(-20) scale(0.6) translate(-150,-80)"></g>
+      <g class="deco-flower-hero-side" data-color="c2" transform="translate(215,42) rotate(20) scale(0.6) translate(-150,-80)"></g>
+      <g class="deco-flower-hero" data-color="c1"></g>
+    </svg>
+  </div>
+  <div class="hero-date" id="hero-date"></div>
+  <div class="hero-month" id="hero-month"></div>
+  <div class="hero-subtitle" id="hero-subtitle"></div>
+  <div class="hero-name">Pour mon amoureuse d'amour 🌸</div>
+</div>
+
+<div class="sep" style="margin-top:16px">
+  <div class="sep-line"></div>
+  <span style="color:rgba(200,80,130,0.5);font-size:10px">♥</span>
+  <div class="sep-line"></div>
+</div>
+
+<div class="content" id="content">
+  <!-- Polaroids d'elle, épinglés façon fond d'écran -->
+  <div class="polaroid" style="top:-6px; right:-42px; transform:rotate(10deg);">
+    <img src="photos/julie-peignoir.jpg" alt="Julie">
+  </div>
+  <div class="polaroid" style="top:340px; left:-40px; transform:rotate(-8deg);">
+    <img src="photos/julie-soiree-1.jpg" alt="Julie" style="height:96px;">
+  </div>
+  <div class="polaroid" style="top:620px; right:-36px; transform:rotate(7deg);">
+    <img src="photos/julie-soiree-2.jpg" alt="Julie" style="height:150px;">
+  </div>
+
+  <!-- Compteur -->
+  <div class="counter-card">
+    <div class="counter-number" id="counter-number"></div>
+    <div class="counter-info">
+      <div class="counter-label">mois ensemble</div>
+      <div class="counter-sub" id="counter-sub"></div>
+    </div>
+  </div>
+
+  <!-- Poème -->
+  <div class="card">
+    <svg class="card-flower-bg" style="right:-20px;bottom:-20px;width:160px;height:160px" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <g class="deco-flower-watermark" data-color="c1"></g>
+    </svg>
+    <div class="card-label">Un poème pour toi</div>
+    <div class="poem" id="poem"></div>
+  </div>
+
+  <!-- Galerie photo (affichée seulement si le mois a des photos) -->
+  <div class="card" id="gallery-card" style="display:none">
+    <div class="card-label">Nos photos</div>
+    <div class="gallery" id="gallery"></div>
+  </div>
+</div>
+
+<div style="width:100%;max-width:460px;padding:0 20px;margin-top:4px;position:relative;z-index:1;text-align:center">
+  <button class="secret-btn" id="secret-btn">je suis caché 🙈</button>
+  <div class="secret-msg" id="secret-msg"></div>
+  <div style="margin-top:6px">
+    <a href="chronologie.html" class="archive-link" style="display:inline">✦ notre chronologie ✦</a>
+    <span style="color:rgba(var(--c1),0.3);margin:0 6px">·</span>
+    <a href="#" class="archive-link" style="display:inline" onclick="openArchive();return false;">✦ mois précédents ✦</a>
+  </div>
+</div>
+
+<div class="footer">
+  <svg width="200" height="60" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 12px;opacity:0.25">
+    <g class="deco-flower-footer" data-cx="80" data-color="c1"></g>
+    <g class="deco-flower-footer" data-cx="150" data-color="c2"></g>
+    <g class="deco-flower-footer" data-cx="220" data-color="c1"></g>
+  </svg>
+  Fait avec tout mon amour pour toi<br>
+  <span style="color:rgba(130,80,110,0.5)">— ton amoureux qui pense à toi —</span>
+</div>
+
+<!-- Panneau archives (onglet caché : double-clic sur le footer) -->
+<div class="archive-overlay" id="archive-overlay">
+  <div class="archive-panel">
+    <div class="archive-title">Notre histoire, mois par mois</div>
+    <div class="archive-list" id="archive-list"></div>
+    <button class="archive-close" id="archive-close">fermer</button>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="mc-toast.js"></script>
+<script>
+const MONTHS = window.SITE_DATA.months;
+const params = new URLSearchParams(location.search);
+const requestedNum = parseInt(params.get('m'), 10);
+const latest = MONTHS[MONTHS.length - 1];
+const month = MONTHS.find(m => m.number === requestedNum) || latest;
+if (month.number !== latest.number) {
+  document.getElementById('old-version-banner').style.display = 'block';
+}
+
+// Thème
+document.documentElement.style.setProperty('--c1', month.theme.c1);
+document.documentElement.style.setProperty('--c2', month.theme.c2);
+document.documentElement.style.setProperty('--glow', month.theme.glow);
+document.documentElement.style.setProperty('--bg-base', month.theme.bgBase || '#0d0515');
+
+// ── Bibliothèque de formes de fleurs déco (lys / tulipe) ──
+const FLOWER_LIB = {
+  lys: {
+    big: (c) => `<g fill="none" stroke="rgba(var(--${c}),1)" stroke-width="1.5"><ellipse cx="100" cy="50" rx="16" ry="42"/><ellipse cx="58" cy="85" rx="13" ry="32" transform="rotate(-35 58 85)"/><ellipse cx="142" cy="85" rx="13" ry="32" transform="rotate(35 142 85)"/><line x1="100" y1="100" x2="100" y2="185"/><ellipse cx="70" cy="150" rx="24" ry="9" transform="rotate(-20 70 150)"/><ellipse cx="130" cy="165" rx="24" ry="9" transform="rotate(20 130 165)"/></g>`,
+    filled: (c) => `<g fill="rgba(var(--${c}),0.2)" stroke="rgba(var(--${c}),0.7)" stroke-width="1.5"><circle cx="100" cy="100" r="12"/><ellipse cx="100" cy="58" rx="10" ry="22"/><ellipse cx="100" cy="142" rx="10" ry="22"/><ellipse cx="58" cy="100" rx="22" ry="10"/><ellipse cx="142" cy="100" rx="22" ry="10"/></g>`,
+    hero: (c) => `<g fill="none" stroke="rgba(var(--${c}),0.7)" stroke-width="1.8"><ellipse cx="150" cy="40" rx="14" ry="36"/><ellipse cx="112" cy="70" rx="11" ry="26" transform="rotate(-35 112 70)"/><ellipse cx="188" cy="70" rx="11" ry="26" transform="rotate(35 188 70)"/><line x1="150" y1="80" x2="150" y2="150"/><ellipse cx="122" cy="125" rx="20" ry="7" transform="rotate(-18 122 125)"/><ellipse cx="178" cy="138" rx="20" ry="7" transform="rotate(18 178 138)"/></g>`,
+    watermark: (c) => `<g fill="rgba(var(--${c}),1)" stroke="none"><circle cx="100" cy="100" r="15"/><ellipse cx="100" cy="60" rx="12" ry="28"/><ellipse cx="100" cy="140" rx="12" ry="28"/><ellipse cx="60" cy="100" rx="28" ry="12"/><ellipse cx="140" cy="100" rx="28" ry="12"/></g>`,
+    footer: (c, cx) => `<g fill="none" stroke="rgba(var(--${c}),1)" stroke-width="1.5" transform="translate(${cx},0)"><ellipse cx="0" cy="16" rx="8" ry="22"/><ellipse cx="-22" cy="34" rx="7" ry="16" transform="rotate(-35 -22 34)"/><ellipse cx="22" cy="34" rx="7" ry="16" transform="rotate(35 22 34)"/><line x1="0" y1="42" x2="0" y2="75"/></g>`
+  },
+  tulipe: {
+    big: (c) => `<g fill="none" stroke="rgba(var(--${c}),1)" stroke-width="1.5"><path d="M100,15 C108,15 114,30 112,47 C111,57 106,67 100,73 C94,67 89,57 88,47 C86,30 92,15 100,15 Z"/><path d="M85,20 C93,20 99,35 97,52 C96,62 91,72 85,78 C79,72 74,62 73,52 C71,35 77,20 85,20 Z" transform="rotate(-22 85 49)"/><path d="M115,20 C123,20 129,35 127,52 C126,62 121,72 115,78 C109,72 104,62 103,52 C101,35 107,20 115,20 Z" transform="rotate(22 115 49)"/><line x1="100" y1="73" x2="100" y2="185"/><ellipse cx="70" cy="150" rx="24" ry="9" transform="rotate(-20 70 150)"/><ellipse cx="130" cy="165" rx="24" ry="9" transform="rotate(20 130 165)"/></g>`,
+    filled: (c) => `<g fill="rgba(var(--${c}),0.2)" stroke="rgba(var(--${c}),0.7)" stroke-width="1.5"><path d="M100,65 C110,65 117,80 115,98 C114,110 108,120 100,126 C92,120 86,110 85,98 C83,80 90,65 100,65 Z"/><path d="M82,72 C92,72 99,87 97,105 C96,117 90,127 82,133 C74,127 68,117 67,105 C65,87 72,72 82,72 Z" transform="rotate(-18 82 102)"/><path d="M118,72 C128,72 135,87 133,105 C132,117 126,127 118,133 C110,127 104,117 103,105 C101,87 108,72 118,72 Z" transform="rotate(18 118 102)"/></g>`,
+    hero: (c) => `<g fill="none" stroke="rgba(var(--${c}),0.7)" stroke-width="1.8"><path d="M150,10 C160,10 167,28 165,48 C164,60 158,72 150,79 C142,72 136,60 135,48 C133,28 140,10 150,10 Z"/><path d="M133,16 C143,16 150,34 148,54 C147,66 141,78 133,85 C125,78 119,66 118,54 C116,34 123,16 133,16 Z" transform="rotate(-22 133 50)"/><path d="M167,16 C177,16 184,34 182,54 C181,66 175,78 167,85 C159,78 153,66 152,54 C150,34 157,16 167,16 Z" transform="rotate(22 167 50)"/><line x1="150" y1="79" x2="150" y2="150"/><ellipse cx="122" cy="125" rx="20" ry="7" transform="rotate(-18 122 125)"/><ellipse cx="178" cy="138" rx="20" ry="7" transform="rotate(18 178 138)"/></g>`,
+    watermark: (c) => `<g fill="rgba(var(--${c}),1)" stroke="none"><path d="M100,55 C112,55 120,75 117,98 C115,112 108,125 100,132 C92,125 85,112 83,98 C80,75 88,55 100,55 Z"/><path d="M78,65 C90,65 98,85 95,108 C93,122 86,135 78,142 C70,135 63,122 61,108 C58,85 66,65 78,65 Z" transform="rotate(-20 78 103)"/><path d="M122,65 C134,65 142,85 139,108 C137,122 130,135 122,142 C114,135 107,122 105,108 C102,85 110,65 122,65 Z" transform="rotate(20 122 103)"/></g>`,
+    footer: (c, cx) => `<g fill="none" stroke="rgba(var(--${c}),1)" stroke-width="1.5" transform="translate(${cx},0)"><path d="M0,8 C6,8 10,17 9,27 C8,33 5,39 0,42 C-5,39 -8,33 -9,27 C-10,17 -6,8 0,8 Z"/><path d="M-10,11 C-4,11 0,20 -1,30 C-2,36 -5,42 -10,45 C-15,42 -18,36 -19,30 C-20,20 -16,11 -10,11 Z" transform="rotate(-20 -10 28)"/><path d="M10,11 C16,11 20,20 19,30 C18,36 15,42 10,45 C5,42 2,36 1,30 C0,20 4,11 10,11 Z" transform="rotate(20 10 28)"/><line x1="0" y1="42" x2="0" y2="75"/></g>`
+  }
+};
+const flowerSet = FLOWER_LIB[month.flowerType] || FLOWER_LIB.lys;
+
+// ── Bouquet animé de l'écran d'ouverture (1 fleur = 1 mois) ──
+const bouquetContainer = document.getElementById('bouquet-container');
+const bouquetCount = Math.max(1, month.number);
+// Éventail resserré : max ±18° même avec beaucoup de fleurs
+const spreadPct = Math.min(34, 10 + bouquetCount * 3);
+let bouquetTotalDelay = 0;
+
+for (let i = 0; i < bouquetCount; i++) {
+  const posInFan = bouquetCount === 1 ? 0 : (i / (bouquetCount - 1)) - 0.5; // -0.5 à 0.5
+  const leftPct = 50 + posInFan * spreadPct;
+  const stemH = 34 + Math.random() * 10 + (i % 3) * 3; // % de la hauteur du conteneur
+  const rot = posInFan * 30;
+  const stemDelay = i * (bouquetCount > 6 ? 0.18 : 0.26);
+  const bloomDelay = stemDelay + 0.75;
+  const petalColor = i % 2 === 0 ? 'c1' : 'c2';
+  const petalColor2 = i % 2 === 0 ? 'c2' : 'c1';
+  bouquetTotalDelay = Math.max(bouquetTotalDelay, bloomDelay + 1.2);
+
+  const flower = document.createElement('div');
+  flower.className = 'bq-flower';
+  flower.style.left = leftPct + '%';
+  flower.style.height = stemH + '%';
+  flower.style.setProperty('--rot', rot + 'deg');
+
+  // Tige
+  const line = document.createElement('div');
+  line.className = 'bq-line';
+  line.style.height = '100%';
+  line.style.setProperty('--delay', stemDelay + 's');
+  flower.appendChild(line);
+
+  // 2 petites feuilles sur la tige
+  [0.32, 0.6].forEach((posRatio, li) => {
+    const leaf = document.createElement('div');
+    leaf.className = 'bq-leaf';
+    const lw = 13, lh = 8;
+    leaf.style.width = lw + 'px';
+    leaf.style.height = lh + 'px';
+    leaf.style.bottom = (posRatio * 100) + '%';
+    leaf.style.left = (li === 0 ? '-' + lw + 'px' : '3px');
+    leaf.style.setProperty('--lrot', (li === 0 ? -35 : 35) + 'deg');
+    leaf.style.setProperty('--delay', (stemDelay + 0.35 + li * 0.15) + 's');
+    if (li === 1) leaf.style.borderRadius = '100% 0 100% 0';
+    flower.appendChild(leaf);
+  });
+
+  // Bouquet floral : conteneur des 4 pétales + cœur, positionné en haut de la tige
+  const bloom = document.createElement('div');
+  bloom.className = 'bq-bloom';
+  bloom.style.position = 'absolute';
+  bloom.style.bottom = '100%';
+  bloom.style.left = '50%';
+  bloom.style.setProperty('--bloomDelay', bloomDelay + 's');
+
+  const petalSize = 15; // px, taille de base d'un pétale
+  [1, 2, 3, 4].forEach((n) => {
+    const petal = document.createElement('div');
+    petal.className = 'bq-petal bq-petal--' + n;
+    const w = n === 4 ? petalSize * 0.8 : petalSize;
+    const h = n === 4 ? petalSize * 0.8 : petalSize * 1.4;
+    petal.style.width = w + 'px';
+    petal.style.height = h + 'px';
+    petal.style.setProperty('--pc', month.theme[petalColor]);
+    petal.style.setProperty('--pc2', month.theme[petalColor2]);
+    bloom.appendChild(petal);
+  });
+  const center = document.createElement('div');
+  center.className = 'bq-center';
+  center.style.width = '9px';
+  center.style.height = '4px';
+  center.style.top = '-3px';
+  center.style.marginLeft = '-4.5px';
+  bloom.appendChild(center);
+
+  // Lumières qui montent depuis la fleur
+  for (let l = 0; l < 5; l++) {
+    const light = document.createElement('div');
+    light.className = 'bq-light';
+    const lsize = 1.5 + Math.random() * 1.5;
+    light.style.width = lsize + 'px';
+    light.style.height = lsize + 'px';
+    light.style.left = (Math.random() * 16 - 8) + 'px';
+    light.style.background = `rgba(var(--${l % 2 === 0 ? petalColor : petalColor2}),1)`;
+    light.style.animationDelay = (bloomDelay + 0.3 + l * 0.6) + 's';
+    bloom.appendChild(light);
+  }
+
+  flower.appendChild(bloom);
+  bouquetContainer.appendChild(flower);
+}
+
+// Étoiles scintillantes en fond de l'écran d'ouverture
+const starsContainer = document.getElementById('opening-stars');
+for (let i = 0; i < 40; i++) {
+  const star = document.createElement('div');
+  star.className = 'opening-star';
+  const size = (Math.random() * 2 + 0.6).toFixed(1);
+  star.style.width = size + 'px';
+  star.style.height = size + 'px';
+  star.style.left = Math.round(Math.random() * 100) + '%';
+  star.style.top = Math.round(Math.random() * 100) + '%';
+  star.style.animationDuration = (1.8 + Math.random() * 2.5).toFixed(1) + 's';
+  star.style.animationDelay = (Math.random() * 3).toFixed(1) + 's';
+  starsContainer.appendChild(star);
+}
+
+window.addEventListener('load', () => {
+  const overlay = document.getElementById('opening-overlay');
+  const waitMs = Math.round((bouquetTotalDelay + 0.6) * 1000);
+  setTimeout(() => { overlay.style.opacity = '0'; setTimeout(() => overlay.style.display = 'none', 1000); }, waitMs);
+});
+document.querySelectorAll('.deco-flower').forEach(g => g.innerHTML = flowerSet.big(g.dataset.color));
+document.querySelectorAll('.deco-flower-filled').forEach(g => g.innerHTML = flowerSet.filled(g.dataset.color));
+document.querySelectorAll('.deco-flower-hero').forEach(g => g.innerHTML = flowerSet.hero(g.dataset.color));
+document.querySelectorAll('.deco-flower-hero-side').forEach(g => g.innerHTML = flowerSet.hero(g.dataset.color));
+document.querySelectorAll('.deco-flower-watermark').forEach(g => g.innerHTML = flowerSet.watermark(g.dataset.color));
+document.querySelectorAll('.deco-flower-footer').forEach(g => g.innerHTML = flowerSet.footer(g.dataset.color, g.dataset.cx));
+
+// Pétales — vraies formes SVG, taille/opacité variables
+const petalsContainer = document.getElementById('petals-container');
+const PETAL_COUNT = 12; // doit matcher les nth-child(1..12) du CSS
+for (let i = 0; i < PETAL_COUNT; i++) {
+  const size = 9 + Math.round(Math.random() * 8);      // 9-17px
+  const opacity = (0.35 + Math.random() * 0.35).toFixed(2); // 0.35-0.70
+  const color = i % 3 === 0 ? 'c2' : 'c1';
+  const span = document.createElement('span');
+  span.className = 'petal';
+  span.innerHTML = `<svg width="${size}" height="${size * 1.15}" viewBox="0 0 20 23" xmlns="http://www.w3.org/2000/svg"><path d="M10,0 C15,4 16,13 10,23 C4,13 5,4 10,0 Z" fill="rgba(var(--${color}),${opacity})"/></svg>`;
+  petalsContainer.appendChild(span);
+}
+
+// Cœurs flottants — tailles/opacités/couleurs variées, avec heartbeat
+const heartsContainer = document.getElementById('hearts-container');
+const HEART_COUNT = 6;
+for (let i = 0; i < HEART_COUNT; i++) {
+  const size = 12 + Math.round(Math.random() * 20);       // 12-32px
+  const opacity = (0.15 + Math.random() * 0.25).toFixed(2); // 0.15-0.40
+  const left = Math.round(5 + Math.random() * 90) + '%';
+  const duration = (14 + Math.random() * 10).toFixed(1) + 's'; // 14-24s
+  const delay = (Math.random() * 12).toFixed(1) + 's';
+  const color = i % 2 === 0 ? 'c1' : 'c2';
+  const wrap = document.createElement('div');
+  wrap.className = 'floating-heart';
+  wrap.style.left = left;
+  wrap.style.animationDuration = duration;
+  wrap.style.animationDelay = delay;
+  wrap.innerHTML = `<div class="heart-pulse" style="animation-delay:${(Math.random()*1.5).toFixed(1)}s">
+    <svg width="${size}" height="${size * 0.9}" viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg">
+      <path d="M23.6,0c-3.4,0-6.3,2.4-7.6,5.5C14.7,2.4,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,15.9,16.9,16,17c0.1,0,15.9-7.6,16-17C32,3.8,28.2,0,23.6,0z" fill="rgba(var(--${color}),${opacity})"/>
+    </svg>
+  </div>`;
+  heartsContainer.appendChild(wrap);
+}
+
+// Hero
+document.getElementById('hero-date').textContent = month.dateRange;
+document.getElementById('hero-month').textContent = month.number + (month.number > 1 ? ' mois' : ' mois');
+document.getElementById('hero-subtitle').textContent = month.subtitle;
+
+// Compteur
+document.getElementById('counter-number').textContent = month.number;
+document.getElementById('counter-sub').textContent = month.counterSub;
+
+// Poème
+const poemEl = document.getElementById('poem');
+month.poem.forEach(strophe => {
+  const div = document.createElement('div');
+  div.className = 'strophe';
+  strophe.lines.forEach(line => {
+    const span = document.createElement('span');
+    span.className = 'verse' + (strophe.special ? ' poem-special' : '');
+    span.textContent = line;
+    div.appendChild(span);
+  });
+  poemEl.appendChild(div);
+});
+
+// Galerie
+if (month.photos && month.photos.length > 0) {
+  const galleryCard = document.getElementById('gallery-card');
+  const gallery = document.getElementById('gallery');
+  galleryCard.style.display = 'block';
+  month.photos.forEach((photo, i) => {
+    const img = document.createElement('img');
+    img.src = photo.src;
+    img.alt = photo.caption || '';
+    if (month.photos.length % 3 === 1 && i === month.photos.length - 1) img.className = 'full';
+    gallery.appendChild(img);
+  });
+}
+
+showAchievementToast('❤️', 'Accomplissement obtenu !', month.number + ' mois parcourus', 2600);
+
+// Easter egg
+document.getElementById('secret-btn').addEventListener('click', () => {
+  document.getElementById('secret-msg').innerHTML = month.secretMessage;
+  document.getElementById('secret-btn').style.display = 'none';
+  document.getElementById('secret-msg').classList.add('visible');
+});
+
+// Onglet caché : double-clic (ou double-tap) sur le footer ouvre les archives
+const archiveOverlay = document.getElementById('archive-overlay');
+const archiveList = document.getElementById('archive-list');
+document.querySelector('.footer').addEventListener('dblclick', openArchive);
+let lastTap = 0;
+document.querySelector('.footer').addEventListener('touchend', () => {
+  const now = Date.now();
+  if (now - lastTap < 400) openArchive();
+  lastTap = now;
+});
+
+function openArchive() {
+  archiveList.innerHTML = '';
+  MONTHS.forEach(m => {
+    const a = document.createElement('a');
+    a.href = 'index.html?m=' + m.number;
+    a.className = 'archive-item' + (m.number === month.number ? ' current' : '');
+    a.innerHTML = `
+      <div class="archive-item-num">${m.number}</div>
+      <div class="archive-item-info">
+        <div class="archive-item-label">${m.number} mois ensemble</div>
+        <div class="archive-item-date">${m.dateRange}</div>
+      </div>`;
+    archiveList.appendChild(a);
+  });
+  archiveOverlay.classList.add('visible');
+}
+document.getElementById('archive-close').addEventListener('click', () => archiveOverlay.classList.remove('visible'));
+archiveOverlay.addEventListener('click', (e) => { if (e.target === archiveOverlay) archiveOverlay.classList.remove('visible'); });
+</script>
+</body>
+</html>
