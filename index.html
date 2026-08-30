@@ -332,7 +332,7 @@ for (let i = 0; i < opCount; i++) {
   [1, 2, 3, 4].forEach((n) => {
     const petal = document.createElement('div');
     petal.className = 'op-petal op-petal--' + n;
-    petal.style.setProperty('--pc', month.theme[n === 4 ? petalColor2 : petalColor]);
+    petal.style.setProperty('--pc', month.theme[petalColor]);
     petal.style.setProperty('--pc2', month.theme[petalColor2]);
     leafs.appendChild(petal);
   });
