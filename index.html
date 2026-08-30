@@ -14,7 +14,91 @@
 <div id="opening-overlay" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:flex-end;justify-content:center;transition:opacity 1s ease;background:var(--bg-base,#0d0515);overflow:hidden;perspective:1000px;">
   <div class="op-night"></div>
   <div id="opening-stars" style="position:absolute;inset:0;z-index:1;overflow:hidden;"></div>
-  <div id="op-flowers" class="op-flowers"></div>
+  <div id="op-flowers" class="op-flowers">
+    <!-- Herbe de fond, portée du CodePen (2 touffes, chacune avec 8 feuilles) -->
+    <div class="op-grass-wrap">
+      <div class="op-grass op-grass--1">
+        <div class="op-grass-top"></div>
+        <div class="op-grass-bottom"></div>
+        <div class="op-grass-leaf op-grass-leaf--1"></div>
+        <div class="op-grass-leaf op-grass-leaf--2"></div>
+        <div class="op-grass-leaf op-grass-leaf--3"></div>
+        <div class="op-grass-leaf op-grass-leaf--4"></div>
+        <div class="op-grass-leaf op-grass-leaf--5"></div>
+        <div class="op-grass-leaf op-grass-leaf--6"></div>
+        <div class="op-grass-leaf op-grass-leaf--7"></div>
+        <div class="op-grass-leaf op-grass-leaf--8"></div>
+        <div class="op-grass-overlay"></div>
+      </div>
+    </div>
+    <div class="op-grass-wrap">
+      <div class="op-grass op-grass--2">
+        <div class="op-grass-top"></div>
+        <div class="op-grass-bottom"></div>
+        <div class="op-grass-leaf op-grass-leaf--1"></div>
+        <div class="op-grass-leaf op-grass-leaf--2"></div>
+        <div class="op-grass-leaf op-grass-leaf--3"></div>
+        <div class="op-grass-leaf op-grass-leaf--4"></div>
+        <div class="op-grass-leaf op-grass-leaf--5"></div>
+        <div class="op-grass-leaf op-grass-leaf--6"></div>
+        <div class="op-grass-leaf op-grass-leaf--7"></div>
+        <div class="op-grass-leaf op-grass-leaf--8"></div>
+        <div class="op-grass-overlay"></div>
+      </div>
+    </div>
+    <!-- Grand brin (g-long) -->
+    <div class="op-grow-ans" style="--d:1.2s">
+      <div class="op-g-long">
+        <div class="op-g-long__top"></div>
+        <div class="op-g-long__bottom"></div>
+      </div>
+    </div>
+
+    <!-- Feuillages latéraux (g-right x2) -->
+    <div class="op-grow-ans" style="--d:2.4s">
+      <div class="op-g-right op-g-right--1"><div class="op-leaf"></div></div>
+    </div>
+    <div class="op-grow-ans" style="--d:2.8s">
+      <div class="op-g-right op-g-right--2"><div class="op-leaf"></div></div>
+    </div>
+
+    <!-- Feuillage avant (g-front, 8 petites feuilles) -->
+    <div class="op-grow-ans" style="--d:2.8s">
+      <div class="op-g-front">
+        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--1"><div class="op-g-front__leaf"></div></div>
+        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--2"><div class="op-g-front__leaf"></div></div>
+        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--3"><div class="op-g-front__leaf"></div></div>
+        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--4"><div class="op-g-front__leaf"></div></div>
+        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--5"><div class="op-g-front__leaf"></div></div>
+        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--6"><div class="op-g-front__leaf"></div></div>
+        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--7"><div class="op-g-front__leaf"></div></div>
+        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--8"><div class="op-g-front__leaf"></div></div>
+        <div class="op-g-front__line"></div>
+      </div>
+    </div>
+
+    <!-- Feuillage avant-droit (g-fr, 8 petites feuilles) -->
+    <div class="op-grow-ans" style="--d:3.2s">
+      <div class="op-g-fr">
+        <div class="op-leaf"></div>
+        <div class="op-g-fr__leaf op-g-fr__leaf--1"></div>
+        <div class="op-g-fr__leaf op-g-fr__leaf--2"></div>
+        <div class="op-g-fr__leaf op-g-fr__leaf--3"></div>
+        <div class="op-g-fr__leaf op-g-fr__leaf--4"></div>
+        <div class="op-g-fr__leaf op-g-fr__leaf--5"></div>
+        <div class="op-g-fr__leaf op-g-fr__leaf--6"></div>
+        <div class="op-g-fr__leaf op-g-fr__leaf--7"></div>
+        <div class="op-g-fr__leaf op-g-fr__leaf--8"></div>
+      </div>
+    </div>
+
+    <!-- Emballage du bouquet -->
+    <div class="op-wrap"></div>
+    <div class="op-ribbon"></div>
+    <div class="op-bow-wing op-bow-wing--l"></div>
+    <div class="op-bow-wing op-bow-wing--r"></div>
+    <div class="op-bow-knot"></div>
+  </div>
   <div class="op-caption">Pour toi, mon cœur…</div>
 </div>
 <style>
@@ -123,6 +207,233 @@
     75%  { transform: translateY(-20vmin) translateX(-2vmin); filter: blur(0.2vmin); }
     100% { transform: translateY(-30vmin); opacity: 0; filter: blur(1vmin); }
   }
+
+  /* ── Emballage du bouquet : papier en cône + ruban + nœud ── */
+  .op-wrap {
+    position: absolute; left: 50%; bottom: 0; transform: translateX(-50%) scale(0);
+    width: 46vmin; height: 20vmin; z-index: 5;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    background: linear-gradient(135deg, #ece0c8, #cca877 55%, #a3805a);
+    box-shadow: inset 0 0 3vmin rgba(0,0,0,0.25), 0 1vmin 2vmin rgba(0,0,0,0.4);
+    animation: op-wrap-in 1s 0.15s cubic-bezier(.3,1.5,.4,1) backwards;
+  }
+  .op-wrap::before {
+    content: ''; position: absolute; inset: 0; clip-path: inherit;
+    background-image: repeating-linear-gradient(70deg, rgba(255,255,255,0.09) 0px, rgba(255,255,255,0.09) 1px, transparent 1px, transparent 8px);
+  }
+  @keyframes op-wrap-in { 0% { transform: translateX(-50%) scale(0); } }
+
+  .op-ribbon {
+    position: absolute; left: 50%; bottom: 24%; transform: translate(-50%, 50%) rotate(-3deg);
+    width: 48vmin; height: 3.2vmin; z-index: 6;
+    background: rgb(var(--c1,210,100,150));
+    box-shadow: 0 0.3vmin 0.6vmin rgba(0,0,0,0.35);
+    animation: op-wrap-in 1s 0.3s cubic-bezier(.3,1.5,.4,1) backwards;
+  }
+  .op-bow-wing {
+    position: absolute; left: 50%; bottom: 24%; width: 4.6vmin; height: 5.2vmin; z-index: 7;
+    background: rgb(var(--c2,160,90,210));
+    box-shadow: 0 0.3vmin 0.5vmin rgba(0,0,0,0.3);
+    animation: op-wrap-in 1s 0.45s cubic-bezier(.3,1.5,.4,1) backwards;
+  }
+  .op-bow-wing--l { border-radius: 60% 60% 5% 60%; transform: translate(calc(-100% - 0.3vmin), 50%) rotate(-20deg); }
+  .op-bow-wing--r { border-radius: 60% 60% 60% 5%; transform: translate(0.3vmin, 50%) rotate(20deg); }
+  .op-bow-knot {
+    position: absolute; left: 50%; bottom: 24%; transform: translate(-50%, 50%); z-index: 8;
+    width: 2.8vmin; height: 2.8vmin; border-radius: 50%;
+    background: rgb(var(--c1,210,100,150));
+    box-shadow: 0 0.2vmin 0.4vmin rgba(0,0,0,0.3);
+    animation: op-wrap-in 1s 0.55s cubic-bezier(.3,1.5,.4,1) backwards;
+  }
+
+  /* ── Herbe de fond, portée fidèlement du CodePen (2 touffes × 8 feuilles) ── */
+  .op-grass-wrap { animation: op-growing-grass-wrap 1s 2s backwards; }
+  @keyframes op-growing-grass-wrap { 0% { transform: scale(0); } }
+
+  .op-grass {
+    --c: #2f8a2a; --line-w: 1.5vmin;
+    position: absolute; bottom: 12vmin; left: -7vmin;
+    display: flex; flex-direction: column; align-items: flex-end;
+    z-index: 4; transform-origin: bottom center;
+    transform: rotate(-48deg) rotateY(40deg);
+    animation: op-moving-grass 2s linear infinite;
+  }
+  .op-grass--2 {
+    left: 2vmin; bottom: 10vmin; opacity: 0.8; z-index: 0;
+    transform: scale(0.5) rotate(75deg) rotateX(10deg) rotateY(-200deg);
+    animation: op-moving-grass-2 1.5s linear infinite;
+  }
+  @keyframes op-moving-grass { 0%, 100% { transform: rotate(-48deg) rotateY(40deg); } 50% { transform: rotate(-50deg) rotateY(40deg); } }
+  @keyframes op-moving-grass-2 { 0%, 100% { transform: scale(0.5) rotate(75deg) rotateX(10deg) rotateY(-200deg); } 50% { transform: scale(0.5) rotate(79deg) rotateX(10deg) rotateY(-200deg); } }
+
+  .op-grass-top {
+    width: 7vmin; height: 10vmin; border-top-right-radius: 100%;
+    border-right: var(--line-w) solid var(--c);
+    transform-origin: bottom center; transform: rotate(-2deg);
+  }
+  .op-grass-bottom {
+    margin-top: -2px; width: var(--line-w); height: 25vmin;
+    background-image: linear-gradient(to top, transparent, var(--c));
+  }
+  .op-grass-leaf {
+    --size: 10vmin; position: absolute;
+    width: calc(var(--size) * 2.1); height: var(--size);
+    border-top-left-radius: var(--size); border-top-right-radius: var(--size);
+    background-image: linear-gradient(to top, transparent, transparent 30%, var(--c));
+    z-index: 100;
+  }
+  .op-grass-leaf--1 { top: -6%; left: 30%; --size: 6vmin; transform: rotate(-20deg); animation: op-grass-leaf-1 2s 2.6s backwards; }
+  @keyframes op-grass-leaf-1 { 0% { transform-origin: bottom left; transform: rotate(-20deg) scale(0); } }
+  .op-grass-leaf--2 { top: -5%; left: -110%; --size: 6vmin; transform: rotate(10deg); animation: op-grass-leaf-2 2s 2.4s linear backwards; }
+  @keyframes op-grass-leaf-2 { 0% { transform-origin: bottom right; transform: rotate(10deg) scale(0); } }
+  .op-grass-leaf--3 { top: 5%; left: 60%; --size: 8vmin; transform: rotate(-18deg) rotateX(-20deg); animation: op-grass-leaf-3 2s 2.2s linear backwards; }
+  @keyframes op-grass-leaf-3 { 0% { transform-origin: bottom left; transform: rotate(-18deg) rotateX(-20deg) scale(0); } }
+  .op-grass-leaf--4 { top: 6%; left: -135%; --size: 8vmin; transform: rotate(2deg); animation: op-grass-leaf-4 2s 2s linear backwards; }
+  @keyframes op-grass-leaf-4 { 0% { transform-origin: bottom right; transform: rotate(2deg) scale(0); } }
+  .op-grass-leaf--5 { top: 20%; left: 60%; --size: 10vmin; transform: rotate(-24deg) rotateX(-20deg); animation: op-grass-leaf-5 2s 1.8s linear backwards; }
+  @keyframes op-grass-leaf-5 { 0% { transform-origin: bottom left; transform: rotate(-24deg) rotateX(-20deg) scale(0); } }
+  .op-grass-leaf--6 { top: 22%; left: -180%; --size: 10vmin; transform: rotate(10deg); animation: op-grass-leaf-6 2s 1.6s linear backwards; }
+  @keyframes op-grass-leaf-6 { 0% { transform-origin: bottom right; transform: rotate(10deg) scale(0); } }
+  .op-grass-leaf--7 { top: 39%; left: 70%; --size: 10vmin; transform: rotate(-10deg); animation: op-grass-leaf-7 2s 1.4s linear backwards; }
+  @keyframes op-grass-leaf-7 { 0% { transform-origin: bottom left; transform: rotate(-10deg) scale(0); } }
+  .op-grass-leaf--8 { top: 40%; left: -215%; --size: 11vmin; transform: rotate(10deg); animation: op-grass-leaf-8 2s 1.2s linear backwards; }
+  @keyframes op-grass-leaf-8 { 0% { transform-origin: bottom right; transform: rotate(10deg) scale(0); } }
+
+  .op-grass-overlay {
+    position: absolute; top: -10%; right: 0%; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.6); filter: blur(1.5vmin); z-index: 100;
+  }
+
+  /* ── Reste du décor de fond, porté fidèlement du CodePen ── */
+  .op-grow-ans { animation: op-pop-ans 2s var(--d) backwards; }
+  @keyframes op-pop-ans { 0% { transform: scale(0); opacity: 0; } }
+
+  .op-g-long {
+    --w: 2vmin; --h: 6vmin; --c: #2f8a2a;
+    position: absolute; bottom: 10vmin; left: -3vmin;
+    transform-origin: bottom center; transform: rotate(-30deg) rotateY(-20deg);
+    display: flex; flex-direction: column; align-items: flex-end;
+    animation: op-g-long-ans 3s linear infinite;
+  }
+  @keyframes op-g-long-ans { 0%, 100% { transform: rotate(-30deg) rotateY(-20deg); } 50% { transform: rotate(-32deg) rotateY(-20deg); } }
+  .op-g-long__top {
+    top: calc(var(--h) * -1); width: calc(var(--w) + 1vmin); height: var(--h);
+    border-top-right-radius: 100%; border-right: 0.7vmin solid var(--c);
+    transform: translate(-0.7vmin, 1vmin);
+  }
+  .op-g-long__bottom {
+    width: var(--w); height: 50vmin; transform-origin: bottom center;
+    background-image: linear-gradient(to top, transparent 30%, var(--c));
+    box-shadow: inset 0 0 2px rgba(0,0,0,0.5);
+    clip-path: polygon(35% 0, 65% 1%, 100% 100%, 0% 100%);
+  }
+
+  .op-g-right { position: absolute; bottom: 6vmin; left: -2vmin; transform-origin: bottom left; transform: rotate(20deg); }
+  .op-g-right .op-leaf {
+    width: 30vmin; height: 50vmin; border-top-left-radius: 100%; border-left: 2vmin solid #1d6e1a;
+    background-image: linear-gradient(to bottom, transparent, var(--bg-base,#0d0515) 60%);
+    -webkit-mask-image: linear-gradient(to top, transparent 30%, #1d6e1a 60%);
+    mask-image: linear-gradient(to top, transparent 30%, #1d6e1a 60%);
+  }
+  .op-g-right--1 { animation: op-g-right-ans 2.5s linear infinite; }
+  .op-g-right--2 { left: 5vmin; transform: rotateY(-180deg); animation: op-g-right-ans-2 3s linear infinite; }
+  .op-g-right--2 .op-leaf { height: 75vmin; filter: blur(0.3vmin); opacity: 0.8; }
+  @keyframes op-g-right-ans { 0%, 100% { transform: rotate(20deg); } 50% { transform: rotate(24deg) rotateX(-20deg); } }
+  @keyframes op-g-right-ans-2 { 0%, 100% { transform: rotateY(-180deg) rotate(0deg) rotateX(-20deg); } 50% { transform: rotateY(-180deg) rotate(6deg) rotateX(-20deg); } }
+
+  .op-g-front {
+    position: absolute; bottom: 6vmin; left: 2.5vmin; z-index: 100;
+    transform-origin: bottom center; transform: rotate(-28deg) rotateY(30deg) scale(1.04);
+    animation: op-g-front-ans 2s linear infinite;
+  }
+  @keyframes op-g-front-ans { 0%, 100% { transform: rotate(-28deg) rotateY(30deg) scale(1.04); } 50% { transform: rotate(-35deg) rotateY(40deg) scale(1.04); } }
+  .op-g-front__line { width: 0.3vmin; height: 20vmin; background-image: linear-gradient(to top, transparent, #1d6e1a, transparent 100%); position: relative; }
+  .op-g-front__leaf-wrapper { position: absolute; top: 0; left: 0; transform-origin: bottom left; transform: rotate(10deg); }
+  .op-g-front__leaf-wrapper:nth-child(even) { left: 0vmin; transform: rotateY(-180deg) rotate(5deg); animation: op-g-front-leaf-left 1s ease-in backwards; }
+  .op-g-front__leaf-wrapper:nth-child(odd) { animation: op-g-front-leaf 1s ease-in backwards; }
+  .op-g-front__leaf-wrapper--1 { top: -8vmin; transform: scale(0.7); animation: op-g-front-leaf 1s 5.5s ease-in backwards !important; }
+  .op-g-front__leaf-wrapper--2 { top: -8vmin; transform: rotateY(-180deg) scale(0.7) !important; animation: op-g-front-leaf-left-2 1s 4.6s ease-in backwards !important; }
+  .op-g-front__leaf-wrapper--3 { top: -3vmin; animation: op-g-front-leaf 1s 4.6s ease-in backwards; }
+  .op-g-front__leaf-wrapper--4 { top: -3vmin; transform: rotateY(-180deg) scale(0.9) !important; animation: op-g-front-leaf-left-2 1s 4.6s ease-in backwards !important; }
+  @keyframes op-g-front-leaf-left-2 { 0% { transform: rotateY(-180deg) scale(0); } }
+  .op-g-front__leaf-wrapper--5, .op-g-front__leaf-wrapper--6 { top: 2vmin; }
+  .op-g-front__leaf-wrapper--7, .op-g-front__leaf-wrapper--8 { top: 6.5vmin; }
+  .op-g-front__leaf-wrapper--2 { animation-delay: 5.2s !important; }
+  .op-g-front__leaf-wrapper--3 { animation-delay: 4.9s !important; }
+  .op-g-front__leaf-wrapper--5 { animation-delay: 4.3s !important; }
+  .op-g-front__leaf-wrapper--6 { animation-delay: 4.1s !important; }
+  .op-g-front__leaf-wrapper--7 { animation-delay: 3.8s !important; }
+  .op-g-front__leaf-wrapper--8 { animation-delay: 3.5s !important; }
+  @keyframes op-g-front-leaf { 0% { transform: rotate(10deg) scale(0); } }
+  @keyframes op-g-front-leaf-left { 0% { transform: rotateY(-180deg) rotate(5deg) scale(0); } }
+  .op-g-front__leaf {
+    width: 10vmin; height: 10vmin;
+    border-radius: 100% 0% 0% 100% / 100% 100% 0% 0%;
+    box-shadow: inset 0 2px 1vmin rgba(150,230,120,0.2);
+    background-image: linear-gradient(to bottom left, transparent, var(--bg-base,#0d0515)), linear-gradient(to bottom right, #2f8a2a 50%, transparent 50%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom right, #2f8a2a 50%, transparent 50%, transparent);
+    mask-image: linear-gradient(to bottom right, #2f8a2a 50%, transparent 50%, transparent);
+  }
+
+  .op-g-fr { position: absolute; bottom: -4vmin; left: 0; transform-origin: bottom left; z-index: 10; animation: op-g-fr-ans 2s linear infinite; }
+  @keyframes op-g-fr-ans { 0%, 100% { transform: rotate(2deg); } 50% { transform: rotate(4deg); } }
+  .op-g-fr .op-leaf {
+    width: 30vmin; height: 50vmin; border-top-left-radius: 100%; border-left: 2vmin solid #1d6e1a;
+    -webkit-mask-image: linear-gradient(to top, transparent 25%, #1d6e1a 50%);
+    mask-image: linear-gradient(to top, transparent 25%, #1d6e1a 50%);
+    position: relative; z-index: 1;
+  }
+  .op-g-fr__leaf {
+    position: absolute; top: 0; left: 0; width: 10vmin; height: 10vmin;
+    border-radius: 100% 0% 0% 100% / 100% 100% 0% 0%;
+    box-shadow: inset 0 2px 1vmin rgba(150,230,120,0.2);
+    background-image: linear-gradient(to bottom left, transparent, var(--bg-base,#0d0515) 98%), linear-gradient(to bottom right, #8fe07a 45%, transparent 50%, transparent);
+    -webkit-mask-image: linear-gradient(135deg, #2f8a2a 40%, transparent 50%, transparent);
+    mask-image: linear-gradient(135deg, #2f8a2a 40%, transparent 50%, transparent);
+  }
+  .op-g-fr__leaf--1 { left: 20vmin; transform: rotate(45deg); animation: op-g-fr-leaf-1 0.5s 5.2s linear backwards; }
+  @keyframes op-g-fr-leaf-1 { 0% { transform-origin: left; transform: rotate(45deg) scale(0); } }
+  .op-g-fr__leaf--2 { left: 12vmin; top: -7vmin; transform: rotate(25deg) rotateY(-180deg); animation: op-g-fr-leaf-6 0.5s 5s linear backwards; }
+  .op-g-fr__leaf--3 { left: 15vmin; top: 6vmin; transform: rotate(55deg); animation: op-g-fr-leaf-5 0.5s 4.8s linear backwards; }
+  .op-g-fr__leaf--4 { left: 6vmin; top: -2vmin; transform: rotate(25deg) rotateY(-180deg); animation: op-g-fr-leaf-6 0.5s 4.6s linear backwards; }
+  .op-g-fr__leaf--5 { left: 10vmin; top: 14vmin; transform: rotate(55deg); animation: op-g-fr-leaf-5 0.5s 4.4s linear backwards; }
+  @keyframes op-g-fr-leaf-5 { 0% { transform-origin: left; transform: rotate(55deg) scale(0); } }
+  .op-g-fr__leaf--6 { left: 0vmin; top: 6vmin; transform: rotate(25deg) rotateY(-180deg); animation: op-g-fr-leaf-6 0.5s 4.2s linear backwards; }
+  @keyframes op-g-fr-leaf-6 { 0% { transform-origin: right; transform: rotate(25deg) rotateY(-180deg) scale(0); } }
+  .op-g-fr__leaf--7 { left: 5vmin; top: 22vmin; transform: rotate(45deg); animation: op-g-fr-leaf-7 0.5s 4s linear backwards; }
+  @keyframes op-g-fr-leaf-7 { 0% { transform-origin: left; transform: rotate(45deg) scale(0); } }
+  .op-g-fr__leaf--8 { left: -4vmin; top: 15vmin; transform: rotate(15deg) rotateY(-180deg); animation: op-g-fr-leaf-8 0.5s 3.8s linear backwards; }
+  @keyframes op-g-fr-leaf-8 { 0% { transform-origin: right; transform: rotate(15deg) rotateY(-180deg) scale(0); } }
+
+  .op-long-g { position: absolute; bottom: 25vmin; left: -42vmin; transform-origin: bottom left; }
+  .op-long-g--1 { bottom: 0vmin; transform: scale(0.8) rotate(-5deg); }
+  .op-long-g--1 .op-leaf { mask-image: linear-gradient(to top, transparent 40%, #1d6e1a 80%) !important; -webkit-mask-image: linear-gradient(to top, transparent 40%, #1d6e1a 80%) !important; }
+  .op-long-g--1 .op-leaf--1 { --w: 5vmin; --h: 60vmin; left: -2vmin; transform: rotate(3deg) rotateY(-180deg); }
+  .op-long-g--2, .op-long-g--3 { bottom: -3vmin; left: -35vmin; transform-origin: center; transform: scale(0.6) rotateX(60deg); }
+  .op-long-g--2 .op-leaf, .op-long-g--3 .op-leaf { mask-image: linear-gradient(to top, transparent 50%, #1d6e1a 80%) !important; -webkit-mask-image: linear-gradient(to top, transparent 50%, #1d6e1a 80%) !important; }
+  .op-long-g--2 .op-leaf--1, .op-long-g--3 .op-leaf--1 { left: -1vmin; transform: rotateY(-180deg); }
+  .op-long-g--3 { left: -17vmin; bottom: 0vmin; }
+  .op-long-g--3 .op-leaf { mask-image: linear-gradient(to top, transparent 40%, #1d6e1a 80%) !important; -webkit-mask-image: linear-gradient(to top, transparent 40%, #1d6e1a 80%) !important; }
+  .op-long-g--4 { left: 25vmin; bottom: -3vmin; transform-origin: center; transform: scale(0.6) rotateX(60deg); }
+  .op-long-g--4 .op-leaf { mask-image: linear-gradient(to top, transparent 50%, #1d6e1a 80%) !important; -webkit-mask-image: linear-gradient(to top, transparent 50%, #1d6e1a 80%) !important; }
+  .op-long-g--5 { left: 42vmin; bottom: 0vmin; transform: scale(0.8) rotate(2deg); }
+  .op-long-g--6 { left: 0vmin; bottom: -20vmin; z-index: 100; filter: blur(0.3vmin); transform: scale(0.8) rotate(2deg); }
+  .op-long-g--7 { left: 35vmin; bottom: 20vmin; z-index: -1; filter: blur(0.3vmin); transform: scale(0.6) rotate(2deg); opacity: 0.7; }
+  .op-long-g .op-leaf {
+    --w: 15vmin; --h: 40vmin; --c: #2f8a2a;
+    position: absolute; bottom: 0; width: var(--w); height: var(--h);
+    border-top-left-radius: 100%; border-left: 2vmin solid var(--c);
+    -webkit-mask-image: linear-gradient(to top, transparent 20%, var(--bg-base,#0d0515));
+    mask-image: linear-gradient(to top, transparent 20%, var(--bg-base,#0d0515));
+    transform-origin: bottom center;
+  }
+  .op-long-g .op-leaf--0 { left: 2vmin; animation: op-leaf-ans-1 4s linear infinite; }
+  .op-long-g .op-leaf--1 { --w: 5vmin; --h: 60vmin; animation: op-leaf-ans-1 4s linear infinite; }
+  .op-long-g .op-leaf--2 { --w: 10vmin; --h: 40vmin; left: -0.5vmin; bottom: 5vmin; transform-origin: bottom left; transform: rotateY(-180deg); animation: op-leaf-ans-2 3s linear infinite; }
+  .op-long-g .op-leaf--3 { --w: 5vmin; --h: 30vmin; left: -1vmin; bottom: 3.2vmin; transform-origin: bottom left; transform: rotate(-10deg) rotateY(-180deg); animation: op-leaf-ans-3 3s linear infinite; }
+  @keyframes op-leaf-ans-1 { 0%, 100% { transform: rotate(-5deg) scale(1); } 50% { transform: rotate(5deg) scale(1.1); } }
+  @keyframes op-leaf-ans-2 { 0%, 100% { transform: rotateY(-180deg) rotate(5deg); } 50% { transform: rotateY(-180deg) rotate(0deg) scale(1.1); } }
+  @keyframes op-leaf-ans-3 { 0%, 100% { transform: rotate(-10deg) rotateY(-180deg); } 50% { transform: rotate(-20deg) rotateY(-180deg); } }
 </style>
 
 <!-- Toast "Accomplissement obtenu !" façon Minecraft -->
@@ -354,6 +665,32 @@ for (let i = 0; i < opCount; i++) {
   flower.appendChild(leafs);
   opFlowersEl.appendChild(flower);
 }
+
+// Les 8 touffes "long-g" de fond, portées du CodePen (délais exacts de l'original)
+const LONG_G_DELAYS = [
+  [3, 2.2, 3.4, 3.6],
+  [3.6, 3.8, 4, 4.2],
+  [4, 4.2, 4.4, 4.6],
+  [4, 4.2, 3, 3.6],
+  [4, 4.2, 3, 3.6],
+  [4, 4.2, 3, 3.6],
+  [4.2, 4.4, 4.6, 4.8],
+  [3, 3.2, 3.5, 3.6]
+];
+LONG_G_DELAYS.forEach((delays, gi) => {
+  const longG = document.createElement('div');
+  longG.className = 'op-long-g op-long-g--' + gi;
+  delays.forEach((d, li) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'op-grow-ans';
+    wrap.style.setProperty('--d', d + 's');
+    const leaf = document.createElement('div');
+    leaf.className = 'op-leaf op-leaf--' + li;
+    wrap.appendChild(leaf);
+    longG.appendChild(wrap);
+  });
+  opFlowersEl.appendChild(longG);
+});
 
 // Étoiles scintillantes en fond de l'écran d'ouverture
 const starsContainer = document.getElementById('opening-stars');
