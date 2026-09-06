@@ -15,6 +15,7 @@
   <div class="op-night"></div>
   <div id="opening-stars" style="position:absolute;inset:0;z-index:1;overflow:hidden;"></div>
   <div id="op-flowers" class="op-flowers">
+    <div id="op-stems-layer" style="position:absolute; inset:0; z-index:3;"></div>
     <!-- Herbe de fond, portée du CodePen (2 touffes, chacune avec 8 feuilles) -->
     <div class="op-grass-wrap">
       <div class="op-grass op-grass--1">
@@ -97,6 +98,7 @@
 
     <!-- Emballage du bouquet -->
     <div class="op-wrap"></div>
+    <div id="op-heads-layer" style="position:absolute; inset:0; z-index:15;"></div>
     <div class="op-ribbon-clip">
       <div class="op-ribbon"></div>
       <div class="op-bow-wing op-bow-wing--l"></div>
@@ -137,7 +139,8 @@
 
   /* ── Fleurs façon CodePen : tige + feuilles + pétales + cœur + lumières ── */
   .op-flowers { position: relative; z-index: 10; transform: scale(0.9); }
-  .op-flower { position: absolute; bottom: 4vmin; transform-origin: bottom center; z-index: 10; }
+  .op-flower-stem { position: absolute; transform-origin: bottom center; }
+  .op-flower-head-wrap { position: absolute; }
   @keyframes op-sway { 0%, 100% { transform: rotate(var(--baseRot,0deg)); } 50% { transform: rotate(calc(var(--baseRot,0deg) + var(--swayAmt,2deg))); } }
 
   .op-line {
@@ -157,11 +160,11 @@
     border-top-right-radius: var(--h); border-bottom-left-radius: var(--h);
     background-image: linear-gradient(to top, rgba(20,70,18,0.5), #6fb35f);
   }
-  .op-line-leaf--r { transform: rotate(70deg) rotateY(30deg); }
+  .op-line-leaf--r { transform: rotate(var(--leafRot, 70deg)) rotateY(30deg); }
   .op-line-leaf--l {
     border-top-right-radius: 0; border-bottom-left-radius: 0;
     border-top-left-radius: var(--h); border-bottom-right-radius: var(--h);
-    left: -460%; transform: rotate(-70deg) rotateY(30deg);
+    left: -460%; transform: rotate(var(--leafRot, -70deg)) rotateY(30deg);
   }
   @keyframes op-leaf-right { 0% { transform-origin: left; transform: rotate(70deg) rotateY(30deg) scale(0); } }
   @keyframes op-leaf-left  { 0% { transform-origin: right; transform: rotate(-70deg) rotateY(30deg) scale(0); } }
@@ -183,9 +186,9 @@
   .op-petal--2 { transform: translate(-50%, -4%) rotateX(40deg); }
   .op-petal--3 { transform: translate(-90%, 0%) rotateY(45deg) rotateX(50deg); }
   .op-petal--4 {
-    width: 8vmin; height: 8vmin; transform-origin: bottom left;
+    width: 8vmin; height: 8vmin; transform-origin: bottom center;
     border-radius: 4vmin 10vmin 4vmin 4vmin;
-    transform: translate(0%, 18%) rotateX(70deg) rotate(-43deg);
+    transform: translateX(-50%) rotateX(68deg);
     background-image: linear-gradient(to top, color-mix(in srgb, rgb(var(--pc,210,100,150)) 55%, black), rgb(var(--pc,210,100,150)));
     z-index: 1; opacity: 0.85;
   }
@@ -704,51 +707,87 @@ const FLOWER_LIB = {
 const flowerSet = FLOWER_LIB[month.flowerType] || FLOWER_LIB.lys;
 
 // ── Bouquet animé de l'écran d'ouverture (1 fleur = 1 mois), structure fidèle au CodePen ──
+// Couches séparées : les tiges (op-stems-layer, z-index 3, SOUS le papier) et les têtes de
+// fleurs (op-heads-layer, z-index 15, AU-DESSUS du papier) sont deux conteneurs DOM distincts,
+// pas juste un z-index sur un même bloc — la profondeur reste donc correcte même si la hauteur
+// des tiges change (compression pour beaucoup de mois, etc).
+const opStemsLayer = document.getElementById('op-stems-layer');
+const opHeadsLayer = document.getElementById('op-heads-layer');
 const opFlowersEl = document.getElementById('op-flowers');
 const opCount = Math.max(1, month.number);
 let opMaxDelay = 0;
 
+// Pseudo-aléatoire déterministe : même seed => toujours la même valeur (composition stable
+// d'un rechargement à l'autre, seule l'animation reste vivante).
+function detRand(seed) {
+  const x = Math.sin(seed * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
+}
+
+// Au-delà de quelques fleurs, on resserre progressivement l'éventail pour rester lisible
+const compress = Math.min(1, 5 / opCount);
+
 for (let i = 0; i < opCount; i++) {
   const posInFan = opCount === 1 ? 0 : (i / (opCount - 1)) - 0.5; // -0.5 à 0.5
-  const baseRot = posInFan * Math.min(50, 26 + opCount * 2); // seul l'angle fait diverger les tiges
-  const stemH = 46 + Math.random() * 16 + (i % 3) * 3; // vmin, comme l'original (55-70vmin pour 3 fleurs)
+  const baseRot = posInFan * Math.min(50, 26 + opCount * 2) * compress;
+  const stemH = 46 + detRand(i * 13 + 1) * 16 + (i % 3) * 3; // vmin
   const stemDelay = 0.3 + i * 0.3;
   const bloomDelay = 1.1 + i * 0.3;
   const petalColor = i % 2 === 0 ? 'c1' : 'c2';
   const petalColor2 = i % 2 === 0 ? 'c2' : 'c1';
   opMaxDelay = Math.max(opMaxDelay, bloomDelay + 2);
+  const swayAmt = 2 + detRand(i * 13 + 2) * 2;
 
-  const flower = document.createElement('div');
-  flower.className = 'op-flower';
-  flower.style.left = '50%'; // toutes les tiges partent du même point à la base, comme un bouquet tenu groupé
-  flower.style.setProperty('--baseRot', baseRot + 'deg');
-  flower.style.setProperty('--swayAmt', (2 + Math.random() * 2) + 'deg');
-  flower.style.animation = 'op-sway 4s linear infinite';
+  // Ancrage propre à chaque fleur (pas un point unique + simple rotation) : léger décalage
+  // horizontal/vertical, différent pour chaque fleur, mais toutes convergent près du ruban.
+  const anchorLeftVmin = posInFan * (1.6 + opCount * 0.5) * compress + (detRand(i * 13 + 3) * 1.2 - 0.6);
+  const anchorBottomVmin = -1 + (i % 2 === 0 ? -0.6 : 0.5) + detRand(i * 13 + 4) * 0.5;
 
-  // Tige
+  // ── Couche 1 : la tige (reste sous le papier) ──
+  const stemWrap = document.createElement('div');
+  stemWrap.className = 'op-flower-stem';
+  stemWrap.style.left = `calc(50% + ${anchorLeftVmin}vmin)`;
+  stemWrap.style.bottom = `${anchorBottomVmin}vmin`;
+  stemWrap.style.setProperty('--baseRot', baseRot + 'deg');
+  stemWrap.style.setProperty('--swayAmt', swayAmt + 'deg');
+  stemWrap.style.animation = 'op-sway 4s linear infinite';
+
   const line = document.createElement('div');
   line.className = 'op-line';
   line.style.height = stemH + 'vmin';
   line.style.animationDelay = stemDelay + 's';
 
-  // 4 petites feuilles le long de la tige, alternées droite/gauche (comme l'original)
   const leafDelays = [stemDelay + 1.3, stemDelay + 1.1, stemDelay + 0.9, stemDelay + 0.7];
   for (let li = 0; li < 4; li++) {
     const isRight = li % 2 === 0;
     const lf = document.createElement('div');
     lf.className = 'op-line-leaf ' + (isRight ? 'op-line-leaf--r' : 'op-line-leaf--l');
-    lf.style.top = (12 + li * 12) + '%';
+    lf.style.top = (12 + li * 12 + (detRand(i * 13 + 10 + li) * 5 - 2.5)) + '%';
+    lf.style.setProperty('--leafRot', ((isRight ? 70 : -70) + (detRand(i * 13 + 20 + li) * 10 - 5)) + 'deg');
     lf.style.animation = (isRight ? 'op-leaf-right' : 'op-leaf-left') + ' 0.8s ' + leafDelays[li] + 's backwards';
     line.appendChild(lf);
   }
-  flower.appendChild(line);
+  stemWrap.appendChild(line);
+  opStemsLayer.appendChild(stemWrap);
 
-  // Bouquet : 4 pétales + cœur blanc/doré, en haut de la tige
+  // ── Couche 2 : la tête de fleur (reste au-dessus du papier) ──
+  // Positionnée au même ancrage que sa tige, décalée de sa hauteur, avec un point de pivot
+  // (transform-origin) reporté exactement sur l'ancrage de la tige : elle tourne donc en
+  // parfaite synchro avec elle pendant le sway, comme si elle y était réellement attachée.
+  const headWrap = document.createElement('div');
+  headWrap.className = 'op-flower-head-wrap';
+  headWrap.style.left = `calc(50% + ${anchorLeftVmin}vmin)`;
+  headWrap.style.bottom = `calc(${anchorBottomVmin}vmin + ${stemH}vmin)`;
+  headWrap.style.transformOrigin = `50% calc(100% + ${stemH}vmin)`;
+  headWrap.style.setProperty('--baseRot', baseRot + 'deg');
+  headWrap.style.setProperty('--swayAmt', swayAmt + 'deg');
+  headWrap.style.animation = 'op-sway 4s linear infinite';
+
   const leafs = document.createElement('div');
   leafs.className = 'op-leafs';
   leafs.style.position = 'absolute';
-  leafs.style.bottom = '100%';
-  leafs.style.left = '50%';
+  leafs.style.bottom = '0';
+  leafs.style.left = '0';
   leafs.style.animationDelay = bloomDelay + 's';
 
   [1, 2, 3, 4].forEach((n) => {
@@ -767,14 +806,14 @@ for (let i = 0; i < opCount; i++) {
   for (let l = 0; l < 8; l++) {
     const light = document.createElement('div');
     light.className = 'op-light';
-    light.style.left = (Math.random() * 12 - 6) + 'vmin';
+    light.style.left = (detRand(i * 13 + 30 + l) * 12 - 6) + 'vmin';
     light.style.background = `rgb(var(--${l % 2 === 0 ? petalColor : petalColor2}))`;
-    light.style.animationDelay = (bloomDelay + 0.3 + Math.random() * 3.2) + 's';
+    light.style.animationDelay = (bloomDelay + 0.3 + detRand(i * 13 + 40 + l) * 3.2) + 's';
     leafs.appendChild(light);
   }
 
-  flower.appendChild(leafs);
-  opFlowersEl.appendChild(flower);
+  headWrap.appendChild(leafs);
+  opHeadsLayer.appendChild(headWrap);
 }
 
 // Les 8 touffes "long-g" de fond, portées du CodePen (délais exacts de l'original)
@@ -808,13 +847,13 @@ const starsContainer = document.getElementById('opening-stars');
 for (let i = 0; i < 40; i++) {
   const star = document.createElement('div');
   star.className = 'opening-star';
-  const size = (Math.random() * 2 + 0.6).toFixed(1);
+  const size = (detRand(i * 7 + 1) * 2 + 0.6).toFixed(1);
   star.style.width = size + 'px';
   star.style.height = size + 'px';
-  star.style.left = Math.round(Math.random() * 100) + '%';
-  star.style.top = Math.round(Math.random() * 100) + '%';
-  star.style.animationDuration = (1.8 + Math.random() * 2.5).toFixed(1) + 's';
-  star.style.animationDelay = (Math.random() * 3).toFixed(1) + 's';
+  star.style.left = Math.round(detRand(i * 7 + 2) * 100) + '%';
+  star.style.top = Math.round(detRand(i * 7 + 3) * 100) + '%';
+  star.style.animationDuration = (1.8 + detRand(i * 7 + 4) * 2.5).toFixed(1) + 's';
+  star.style.animationDelay = (detRand(i * 7 + 5) * 3).toFixed(1) + 's';
   starsContainer.appendChild(star);
 }
 
