@@ -10,100 +10,34 @@
 </head>
 <body>
 
-<!-- Animation d'ouverture : bouquet qui pousse (1 fleur = 1 mois), porté du CodePen "blossoming flowers" -->
-<div id="opening-overlay" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:flex-end;justify-content:center;transition:opacity 1s ease;background:var(--bg-base,#0d0515);overflow:hidden;perspective:1000px;">
+<!-- Animation d'ouverture : tournesol animé (adapté d'un CodePen, sans tige) -->
+<div id="opening-overlay" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity 1s ease;background:var(--bg-base,#0d0515);overflow:hidden;">
   <div class="op-night"></div>
   <div id="opening-stars" style="position:absolute;inset:0;z-index:1;overflow:hidden;"></div>
-  <div id="op-flowers" class="op-flowers">
-    <div id="op-stems-layer" style="position:absolute; inset:0; z-index:3;"></div>
-    <!-- Herbe de fond, portée du CodePen (2 touffes, chacune avec 8 feuilles) -->
-    <div class="op-grass-wrap">
-      <div class="op-grass op-grass--1">
-        <div class="op-grass-top"></div>
-        <div class="op-grass-bottom"></div>
-        <div class="op-grass-leaf op-grass-leaf--1"></div>
-        <div class="op-grass-leaf op-grass-leaf--2"></div>
-        <div class="op-grass-leaf op-grass-leaf--3"></div>
-        <div class="op-grass-leaf op-grass-leaf--4"></div>
-        <div class="op-grass-leaf op-grass-leaf--5"></div>
-        <div class="op-grass-leaf op-grass-leaf--6"></div>
-        <div class="op-grass-leaf op-grass-leaf--7"></div>
-        <div class="op-grass-leaf op-grass-leaf--8"></div>
-        <div class="op-grass-overlay"></div>
-      </div>
-    </div>
-    <div class="op-grass-wrap">
-      <div class="op-grass op-grass--2">
-        <div class="op-grass-top"></div>
-        <div class="op-grass-bottom"></div>
-        <div class="op-grass-leaf op-grass-leaf--1"></div>
-        <div class="op-grass-leaf op-grass-leaf--2"></div>
-        <div class="op-grass-leaf op-grass-leaf--3"></div>
-        <div class="op-grass-leaf op-grass-leaf--4"></div>
-        <div class="op-grass-leaf op-grass-leaf--5"></div>
-        <div class="op-grass-leaf op-grass-leaf--6"></div>
-        <div class="op-grass-leaf op-grass-leaf--7"></div>
-        <div class="op-grass-leaf op-grass-leaf--8"></div>
-        <div class="op-grass-overlay"></div>
-      </div>
-    </div>
-    <!-- Grand brin (g-long) -->
-    <div class="op-grow-ans" style="--d:1.2s">
-      <div class="op-g-long">
-        <div class="op-g-long__top"></div>
-        <div class="op-g-long__bottom"></div>
-      </div>
-    </div>
-
-    <!-- Feuillages latéraux (g-right x2) -->
-    <div class="op-grow-ans" style="--d:2.4s">
-      <div class="op-g-right op-g-right--1"><div class="op-leaf"></div></div>
-    </div>
-    <div class="op-grow-ans" style="--d:2.8s">
-      <div class="op-g-right op-g-right--2"><div class="op-leaf"></div></div>
-    </div>
-
-    <!-- Feuillage avant (g-front, 8 petites feuilles) -->
-    <div class="op-grow-ans" style="--d:2.8s">
-      <div class="op-g-front">
-        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--1"><div class="op-g-front__leaf"></div></div>
-        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--2"><div class="op-g-front__leaf"></div></div>
-        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--3"><div class="op-g-front__leaf"></div></div>
-        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--4"><div class="op-g-front__leaf"></div></div>
-        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--5"><div class="op-g-front__leaf"></div></div>
-        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--6"><div class="op-g-front__leaf"></div></div>
-        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--7"><div class="op-g-front__leaf"></div></div>
-        <div class="op-g-front__leaf-wrapper op-g-front__leaf-wrapper--8"><div class="op-g-front__leaf"></div></div>
-        <div class="op-g-front__line"></div>
-      </div>
-    </div>
-
-    <!-- Feuillage avant-droit (g-fr, 8 petites feuilles) -->
-    <div class="op-grow-ans" style="--d:3.2s">
-      <div class="op-g-fr">
-        <div class="op-leaf"></div>
-        <div class="op-g-fr__leaf op-g-fr__leaf--1"></div>
-        <div class="op-g-fr__leaf op-g-fr__leaf--2"></div>
-        <div class="op-g-fr__leaf op-g-fr__leaf--3"></div>
-        <div class="op-g-fr__leaf op-g-fr__leaf--4"></div>
-        <div class="op-g-fr__leaf op-g-fr__leaf--5"></div>
-        <div class="op-g-fr__leaf op-g-fr__leaf--6"></div>
-        <div class="op-g-fr__leaf op-g-fr__leaf--7"></div>
-        <div class="op-g-fr__leaf op-g-fr__leaf--8"></div>
-      </div>
-    </div>
-
-    <!-- Lueur ambiante des fleurs sur le feuillage -->
-    <div class="op-ground-glow"></div>
-
-    <!-- Emballage du bouquet -->
-    <div class="op-wrap"></div>
-    <div id="op-heads-layer" style="position:absolute; inset:0; z-index:15;"></div>
-    <div class="op-ribbon-clip">
-      <div class="op-ribbon"></div>
-      <div class="op-bow-wing op-bow-wing--l"></div>
-      <div class="op-bow-wing op-bow-wing--r"></div>
-      <div class="op-bow-knot"></div>
+  <div id="sf-bg-lights" style="position:absolute;inset:0;z-index:1;overflow:hidden;"></div>
+  <div class="sf-scene">
+    <div class="flower_wrapper">
+      <div class="flower_center"></div>
+      <div class="flower_petal flower_petal-1"></div>
+      <div class="flower_petal flower_petal-2"></div>
+      <div class="flower_petal flower_petal-3"></div>
+      <div class="flower_petal flower_petal-4"></div>
+      <div class="flower_petal flower_petal-5"></div>
+      <div class="flower_petal flower_petal-6"></div>
+      <div class="flower_petal flower_petal-7"></div>
+      <div class="flower_petal flower_petal-8"></div>
+      <div class="flower_petal flower_petal-9"></div>
+      <div class="flower_petal flower_petal-10"></div>
+      <div class="flower_petal flower_petal-11"></div>
+      <div class="flower_petal flower_petal-12"></div>
+      <div class="flower_light flower_light-1"></div>
+      <div class="flower_light flower_light-2"></div>
+      <div class="flower_light flower_light-3"></div>
+      <div class="flower_light flower_light-4"></div>
+      <div class="flower_light flower_light-5"></div>
+      <div class="flower_light flower_light-6"></div>
+      <div class="flower_light flower_light-7"></div>
+      <div class="flower_light flower_light-8"></div>
     </div>
   </div>
   <div class="op-caption">Pour toi, mon cœur…</div>
@@ -137,359 +71,93 @@
     animation: fadeIn 1s ease 0.6s both;
   }
 
-  /* ── Fleurs façon CodePen : tige + feuilles + pétales + cœur + lumières ── */
-  .op-flowers { position: relative; z-index: 10; transform: scale(0.9); }
-  .op-flower-stem { position: absolute; transform-origin: bottom center; }
-  .op-flower-head-wrap { position: absolute; }
-  @keyframes op-sway { 0%, 100% { transform: rotate(var(--baseRot,0deg)); } 50% { transform: rotate(calc(var(--baseRot,0deg) + var(--swayAmt,2deg))); } }
+  /* ── Tournesol animé (adapté d'un CodePen, sans tige) ── */
+  .sf-scene {
+    position: absolute; inset: 0; z-index: 5;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .flower_wrapper {
+    position: relative; width: 1px; height: 1px;
+    animation: sf-sway 4s ease-in-out infinite;
+  }
+  .flower_center {
+    position: absolute; left: 0; top: 0; z-index: 5;
+    transform: translate(-50%, -50%) rotate(-10deg);
+    width: 20vmin; height: 20vmin; border-radius: 50%;
+    background: radial-gradient(circle, #180d00, #8a4a10);
+    box-shadow: 0 0 5vmin rgba(255,180,50,0.35);
+    animation: sf-open-center 1.2s 0.3s backwards;
+  }
+  .flower_petal {
+    position: absolute; left: 0; bottom: 0; z-index: 3;
+    transform: translateX(-50%);
+    width: 7vmin; height: 20vmin;
+    background: radial-gradient(circle, #ff9d1c, #ffd85c);
+    clip-path: ellipse(50% 50% at 50% 50%);
+    transform-origin: center bottom;
+    animation: sf-open-petal 1.2s 0.7s backwards;
+  }
+  .flower_petal-1 {
+    border-radius: 50% 50% 50% / 80% 80% 20% 20%;
+    clip-path: none;
+    animation: sf-open-petal 1s 0.7s backwards;
+  }
+  .flower_petal-2  { transform: translateX(-50%) rotate(-30deg); }
+  .flower_petal-3  { transform: translateX(-50%) rotate(-60deg); }
+  .flower_petal-4  { transform: translateX(-50%) rotate(-90deg); }
+  .flower_petal-5  { transform: translateX(-50%) rotate(-120deg); }
+  .flower_petal-6  { transform: translateX(-50%) rotate(-150deg); }
+  .flower_petal-7  { transform: translateX(-50%) rotate(30deg); }
+  .flower_petal-8  { transform: translateX(-50%) rotate(60deg); }
+  .flower_petal-9  { transform: translateX(-50%) rotate(90deg); }
+  .flower_petal-10 { transform: translateX(-50%) rotate(120deg); }
+  .flower_petal-11 { transform: translateX(-50%) rotate(150deg); }
+  .flower_petal-12 { transform: translateX(-50%) rotate(180deg); }
 
-  .op-line {
-    width: 1.5vmin;
-    background-image:
-      linear-gradient(to left, rgba(0,0,0,0.2), transparent, rgba(255,255,255,0.15)),
-      linear-gradient(to top, transparent 10%, #1d4a1a, #6fb35f);
-    box-shadow: inset 0 0 2px rgba(0,0,0,0.5);
-    animation: op-grow 1.6s backwards;
+  .flower_light {
+    position: absolute; bottom: 8vmin; width: 1vmin; height: 1vmin;
+    background-color: #fffb00; border-radius: 50%;
+    filter: blur(0.2vmin);
+    animation: sf-light-ans 4s linear infinite backwards;
   }
-  @keyframes op-grow { 0% { height: 0; border-radius: 1vmin; } }
+  .flower_light:nth-child(odd) { background-color: #ffde7a; }
+  .flower_light-1 { left: -2vmin; animation-delay: 1s; }
+  .flower_light-2 { left: 3vmin;  animation-delay: 0.5s; }
+  .flower_light-3 { left: -6vmin; animation-delay: 0.3s; }
+  .flower_light-4 { left: 6vmin;  animation-delay: 0.9s; }
+  .flower_light-5 { left: -1vmin; animation-delay: 1.5s; }
+  .flower_light-6 { left: -4vmin; animation-delay: 3s; }
+  .flower_light-7 { left: 3vmin;  animation-delay: 2s; }
+  .flower_light-8 { left: -6vmin; animation-delay: 3.5s; }
 
-  .op-line-leaf {
-    --w: 6vmin; --h: calc(var(--w) + 2vmin);
-    position: absolute; top: 20%; left: 90%;
-    width: var(--w); height: var(--h);
-    border-top-right-radius: var(--h); border-bottom-left-radius: var(--h);
-    background-image: linear-gradient(to top, rgba(20,70,18,0.5), #6fb35f);
+  .sf-bg-light {
+    position: absolute; bottom: 0; width: 1vmin; height: 1vmin;
+    background-color: #fffb00; border-radius: 50%;
+    filter: blur(0.2vmin);
+    animation: sf-light-bg-ans 7s linear infinite backwards;
   }
-  .op-line-leaf--r { transform: rotate(var(--leafRot, 70deg)) rotateY(30deg); }
-  .op-line-leaf--l {
-    border-top-right-radius: 0; border-bottom-left-radius: 0;
-    border-top-left-radius: var(--h); border-bottom-right-radius: var(--h);
-    left: -460%; transform: rotate(var(--leafRot, -70deg)) rotateY(30deg);
-  }
-  @keyframes op-leaf-right { 0% { transform-origin: left; transform: rotate(70deg) rotateY(30deg) scale(0); } }
-  @keyframes op-leaf-left  { 0% { transform-origin: right; transform: rotate(-70deg) rotateY(30deg) scale(0); } }
+  .sf-bg-light:nth-child(odd) { background-color: #ffde7a; }
 
-  .op-leafs { position: relative; animation: op-bloom 2s backwards; }
-  @keyframes op-bloom { 0% { transform: scale(0); } }
-  .op-leafs::after {
-    content: ''; position: absolute; left: 0; top: 0; transform: translate(-50%,-100%);
-    width: 8vmin; height: 8vmin; background-color: rgb(var(--c1,210,100,150)); filter: blur(10vmin); opacity: 0.55;
+  @keyframes sf-sway {
+    0%, 100% { transform: rotate(-2deg); }
+    50%      { transform: rotate(2deg); }
   }
-  .op-petal {
-    position: absolute; bottom: 0; left: 50%; width: 8vmin; height: 11vmin;
-    border-radius: 51% 49% 47% 53% / 44% 45% 55% 69%;
-    transform-origin: bottom center; opacity: 0.92;
-    box-shadow: inset 0 0 2vmin rgba(255,255,255,0.45);
-    background-image: linear-gradient(to top, color-mix(in srgb, rgb(var(--pc,210,100,150)) 55%, black), rgb(var(--pc,210,100,150)));
-  }
-  .op-petal--1 { transform: translate(-10%, 1%) rotateY(40deg) rotateX(-50deg); }
-  .op-petal--2 { transform: translate(-50%, -4%) rotateX(40deg); }
-  .op-petal--3 { transform: translate(-90%, 0%) rotateY(45deg) rotateX(50deg); }
-  .op-petal--4 {
-    width: 8vmin; height: 8vmin; transform-origin: bottom center;
-    border-radius: 4vmin 10vmin 4vmin 4vmin;
-    transform: translateX(-50%) rotateX(68deg);
-    background-image: linear-gradient(to top, color-mix(in srgb, rgb(var(--pc,210,100,150)) 55%, black), rgb(var(--pc,210,100,150)));
-    z-index: 1; opacity: 0.85;
-  }
-  .op-white-circle {
-    position: absolute; left: -3.5vmin; top: -3vmin; width: 9vmin; height: 4vmin;
-    border-radius: 50%; background-color: #fff;
-  }
-  .op-white-circle::after {
-    content: ''; position: absolute; left: 50%; top: 45%; transform: translate(-50%,-50%);
-    width: 60%; height: 60%; border-radius: inherit;
-    background-image:
-      repeating-linear-gradient(135deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px, transparent 1px, transparent 12px),
-      repeating-linear-gradient(45deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px, transparent 1px, transparent 12px),
-      linear-gradient(90deg, #ffeb12, #ffce00);
-  }
-  .op-light {
-    position: absolute; bottom: 0vmin; width: 1vmin; height: 1vmin; border-radius: 50%;
-    filter: blur(0.2vmin); animation: op-light-ans 4s linear infinite backwards;
-  }
-  @keyframes op-light-ans {
-    0%   { opacity: 0; transform: translateY(0vmin); }
+  @keyframes sf-open-petal { 0% { transform: translateX(-50%) rotate(0) scale(0); } }
+  @keyframes sf-open-center { 0% { opacity: 0; transform: translate(-50%,-50%) scale(0); } }
+  @keyframes sf-light-ans {
+    0%   { opacity: 0; transform: translateY(0); }
     25%  { opacity: 1; transform: translateY(-5vmin) translateX(-2vmin); }
     50%  { opacity: 1; transform: translateY(-15vmin) translateX(2vmin); filter: blur(0.2vmin); }
     75%  { transform: translateY(-20vmin) translateX(-2vmin); filter: blur(0.2vmin); }
     100% { transform: translateY(-30vmin); opacity: 0; filter: blur(1vmin); }
   }
-
-  /* ── Emballage du bouquet : papier en cône + ruban + nœud ── */
-  /* ── Lueur ambiante venant des fleurs, éclabousse le feuillage en dessous ── */
-  .op-ground-glow {
-    position: absolute; left: 50%; bottom: 0; transform: translate(-50%, 30%);
-    width: 60vmin; height: 26vmin; border-radius: 50%; z-index: 3;
-    background: radial-gradient(ellipse, rgba(var(--c1,210,100,150),0.35) 0%, rgba(var(--glow,120,20,80),0.15) 45%, transparent 75%);
-    filter: blur(1.5vmin);
-    animation: op-bloom 2.2s 0.4s backwards;
+  @keyframes sf-light-bg-ans {
+    0%   { opacity: 0; transform: translateY(0); }
+    25%  { opacity: 1; transform: translateY(-10vmin) translateX(-2vmin); }
+    50%  { opacity: 1; transform: translateY(-20vmin) translateX(2vmin); filter: blur(0.2vmin); }
+    70%  { transform: translateY(-40vmin) translateX(2vmin); filter: blur(0.2vmin); }
+    100% { transform: translateY(-60vmin); opacity: 0; filter: blur(1vmin); }
   }
-
-  .op-wrap {
-    position: absolute; left: 50%; bottom: -1vmin; transform: translateX(-50%);
-    width: 70vmin; height: 40vmin; z-index: 5;
-    /* pointe en bas, 2 coins hauts sur les côtés, encoche en V au centre avant */
-    clip-path: polygon(50% 100%, 6% 6%, 50% 34%, 94% 6%);
-    transform-origin: center bottom;
-    background-color: #cca877;
-    background-image:
-      radial-gradient(ellipse 40vmin 30vmin at 10% 10%, rgba(var(--c2,160,90,210),0.5), transparent 70%),
-      radial-gradient(ellipse 40vmin 30vmin at 90% 10%, rgba(var(--c1,210,100,150),0.5), transparent 70%),
-      radial-gradient(ellipse 30vmin 24vmin at 50% 45%, rgba(255,244,224,0.6), transparent 75%),
-      repeating-linear-gradient(72deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 1px, transparent 1px, transparent 5vmin),
-      linear-gradient(150deg, #f4ece0 0%, #d9c3a0 55%, #a3805a 100%);
-    box-shadow: inset 0 0 4vmin rgba(0,0,0,0.3), 0 1.4vmin 2.6vmin rgba(0,0,0,0.5);
-    animation: op-in-wrap 1.1s 0.15s cubic-bezier(.3,1.4,.4,1) backwards;
-  }
-  .op-wrap::after {
-    content: ''; position: absolute; left: 6%; top: 6%; width: 44%; height: 28%;
-    background: linear-gradient(115deg, rgba(0,0,0,0.22), transparent 70%);
-    clip-path: inherit;
-  }
-  @keyframes op-in-wrap { 0% { transform: translateX(-50%) scale(0); } }
-
-  .op-ribbon-clip {
-    position: absolute; left: 50%; bottom: -1vmin; transform: translateX(-50%);
-    width: 70vmin; height: 40vmin; z-index: 200;
-    clip-path: polygon(50% 100%, 6% 6%, 50% 34%, 94% 6%);
-    pointer-events: none;
-  }
-  .op-ribbon {
-    position: absolute; left: 50%; bottom: 18vmin; transform: translate(-50%, 50%) rotate(-3deg);
-    width: 62vmin; height: 5vmin;
-    background-color: rgb(var(--c1,210,100,150));
-    background-image: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent 50%);
-    box-shadow: 0 0.4vmin 0.8vmin rgba(0,0,0,0.4);
-    transform-origin: center center;
-    animation: op-in-ribbon 1s 0.3s cubic-bezier(.3,1.5,.4,1) backwards;
-  }
-  @keyframes op-in-ribbon { 0% { transform: translate(-50%, 50%) rotate(-3deg) scale(0); } }
-
-  .op-bow-wing {
-    position: absolute; left: 50%; bottom: 18vmin; width: 7.4vmin; height: 8.2vmin;
-    background-color: rgb(var(--c2,160,90,210));
-    background-image: linear-gradient(135deg, rgba(255,255,255,0.35), transparent 40%, rgba(0,0,0,0.3) 100%);
-    box-shadow: 0 0.4vmin 0.7vmin rgba(0,0,0,0.35);
-  }
-  .op-bow-wing--l {
-    border-radius: 60% 60% 5% 60%; transform: translate(calc(-100% - 0.4vmin), 50%) rotate(-20deg);
-    transform-origin: right center;
-    animation: op-in-bow-l 1s 0.45s cubic-bezier(.3,1.5,.4,1) backwards;
-  }
-  .op-bow-wing--r {
-    border-radius: 60% 60% 60% 5%; transform: translate(0.4vmin, 50%) rotate(20deg);
-    transform-origin: left center;
-    animation: op-in-bow-r 1s 0.45s cubic-bezier(.3,1.5,.4,1) backwards;
-  }
-  @keyframes op-in-bow-l { 0% { transform: translate(calc(-100% - 0.4vmin), 50%) rotate(-20deg) scale(0); } }
-  @keyframes op-in-bow-r { 0% { transform: translate(0.4vmin, 50%) rotate(20deg) scale(0); } }
-
-  .op-bow-knot {
-    position: absolute; left: 50%; bottom: 18vmin; transform: translate(-50%, 50%);
-    width: 4.4vmin; height: 4.4vmin; border-radius: 50%;
-    background-color: rgb(var(--c1,210,100,150));
-    background-image: linear-gradient(135deg, rgba(255,255,255,0.4), transparent 70%);
-    box-shadow: 0 0.3vmin 0.5vmin rgba(0,0,0,0.35);
-    transform-origin: center center;
-    animation: op-in-knot 1s 0.55s cubic-bezier(.3,1.5,.4,1) backwards;
-  }
-  @keyframes op-in-knot { 0% { transform: translate(-50%, 50%) scale(0); } }
-
-  /* ── Herbe de fond, portée fidèlement du CodePen (2 touffes × 8 feuilles) ── */
-  .op-grass-wrap { animation: op-growing-grass-wrap 1s 2s backwards; }
-  @keyframes op-growing-grass-wrap { 0% { transform: scale(0); } }
-
-  .op-grass {
-    --c: #3ea638; --line-w: 1.5vmin;
-    position: absolute; bottom: 12vmin; left: -7vmin;
-    display: flex; flex-direction: column; align-items: flex-end;
-    z-index: 4; transform-origin: bottom center;
-    transform: rotate(-48deg) rotateY(40deg);
-    animation: op-moving-grass 2s linear infinite;
-    filter: drop-shadow(0 0.3vmin 0.4vmin rgba(0,0,0,0.4));
-  }
-  .op-grass--2 {
-    left: 2vmin; bottom: 10vmin; opacity: 0.7; z-index: 0;
-    --c: #1c5c1a;
-    transform: scale(0.5) rotate(75deg) rotateX(10deg) rotateY(-200deg);
-    animation: op-moving-grass-2 1.5s linear infinite;
-    filter: blur(0.15vmin);
-  }
-  @keyframes op-moving-grass { 0%, 100% { transform: rotate(-48deg) rotateY(40deg); } 50% { transform: rotate(-50deg) rotateY(40deg); } }
-  @keyframes op-moving-grass-2 { 0%, 100% { transform: scale(0.5) rotate(75deg) rotateX(10deg) rotateY(-200deg); } 50% { transform: scale(0.5) rotate(79deg) rotateX(10deg) rotateY(-200deg); } }
-
-  .op-grass-top {
-    width: 7vmin; height: 10vmin; border-top-right-radius: 100%;
-    border-right: var(--line-w) solid var(--c);
-    transform-origin: bottom center; transform: rotate(-2deg);
-    box-shadow: inset 0.3vmin 0 0.6vmin rgba(255,255,255,0.25);
-  }
-  .op-grass-bottom {
-    margin-top: -2px; width: var(--line-w); height: 25vmin;
-    background-image: linear-gradient(to top, transparent, var(--c));
-  }
-  .op-grass-leaf {
-    --size: 10vmin; position: absolute;
-    width: calc(var(--size) * 2.1); height: var(--size);
-    border-top-left-radius: var(--size); border-top-right-radius: var(--size);
-    background-image: linear-gradient(to top, transparent, transparent 30%, var(--c));
-    z-index: 100;
-  }
-  .op-grass-leaf--1 { top: -6%; left: 30%; --size: 6vmin; transform: rotate(-20deg); animation: op-grass-leaf-1 2s 2.6s backwards; }
-  @keyframes op-grass-leaf-1 { 0% { transform-origin: bottom left; transform: rotate(-20deg) scale(0); } }
-  .op-grass-leaf--2 { top: -5%; left: -110%; --size: 6vmin; transform: rotate(10deg); animation: op-grass-leaf-2 2s 2.4s linear backwards; }
-  @keyframes op-grass-leaf-2 { 0% { transform-origin: bottom right; transform: rotate(10deg) scale(0); } }
-  .op-grass-leaf--3 { top: 5%; left: 60%; --size: 8vmin; transform: rotate(-18deg) rotateX(-20deg); animation: op-grass-leaf-3 2s 2.2s linear backwards; }
-  @keyframes op-grass-leaf-3 { 0% { transform-origin: bottom left; transform: rotate(-18deg) rotateX(-20deg) scale(0); } }
-  .op-grass-leaf--4 { top: 6%; left: -135%; --size: 8vmin; transform: rotate(2deg); animation: op-grass-leaf-4 2s 2s linear backwards; }
-  @keyframes op-grass-leaf-4 { 0% { transform-origin: bottom right; transform: rotate(2deg) scale(0); } }
-  .op-grass-leaf--5 { top: 20%; left: 60%; --size: 10vmin; transform: rotate(-24deg) rotateX(-20deg); animation: op-grass-leaf-5 2s 1.8s linear backwards; }
-  @keyframes op-grass-leaf-5 { 0% { transform-origin: bottom left; transform: rotate(-24deg) rotateX(-20deg) scale(0); } }
-  .op-grass-leaf--6 { top: 22%; left: -180%; --size: 10vmin; transform: rotate(10deg); animation: op-grass-leaf-6 2s 1.6s linear backwards; }
-  @keyframes op-grass-leaf-6 { 0% { transform-origin: bottom right; transform: rotate(10deg) scale(0); } }
-  .op-grass-leaf--7 { top: 39%; left: 70%; --size: 10vmin; transform: rotate(-10deg); animation: op-grass-leaf-7 2s 1.4s linear backwards; }
-  @keyframes op-grass-leaf-7 { 0% { transform-origin: bottom left; transform: rotate(-10deg) scale(0); } }
-  .op-grass-leaf--8 { top: 40%; left: -215%; --size: 11vmin; transform: rotate(10deg); animation: op-grass-leaf-8 2s 1.2s linear backwards; }
-  @keyframes op-grass-leaf-8 { 0% { transform-origin: bottom right; transform: rotate(10deg) scale(0); } }
-
-  .op-grass-overlay {
-    position: absolute; top: -10%; right: 0%; width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.6); filter: blur(1.5vmin); z-index: 100;
-  }
-
-  /* ── Reste du décor de fond, porté fidèlement du CodePen ── */
-  .op-grow-ans { animation: op-pop-ans 2s var(--d) backwards; }
-  @keyframes op-pop-ans { 0% { transform: scale(0); opacity: 0; } }
-
-  .op-g-long {
-    --w: 2vmin; --h: 6vmin; --c: #245c1f;
-    position: absolute; bottom: 10vmin; left: -3vmin;
-    transform-origin: bottom center; transform: rotate(-30deg) rotateY(-20deg);
-    display: flex; flex-direction: column; align-items: flex-end;
-    animation: op-g-long-ans 3s linear infinite;
-  }
-  @keyframes op-g-long-ans { 0%, 100% { transform: rotate(-30deg) rotateY(-20deg); } 50% { transform: rotate(-32deg) rotateY(-20deg); } }
-  .op-g-long__top {
-    top: calc(var(--h) * -1); width: calc(var(--w) + 1vmin); height: var(--h);
-    border-top-right-radius: 100%; border-right: 0.7vmin solid var(--c);
-    transform: translate(-0.7vmin, 1vmin);
-  }
-  .op-g-long__bottom {
-    width: var(--w); height: 50vmin; transform-origin: bottom center;
-    background-image: linear-gradient(to top, transparent 30%, var(--c));
-    box-shadow: inset 0 0 2px rgba(0,0,0,0.5);
-    clip-path: polygon(35% 0, 65% 1%, 100% 100%, 0% 100%);
-  }
-
-  .op-g-right { position: absolute; bottom: 6vmin; left: -2vmin; transform-origin: bottom left; transform: rotate(20deg); }
-  .op-g-right .op-leaf {
-    width: 30vmin; height: 50vmin; border-top-left-radius: 100%; border-left: 2vmin solid #4bb843;
-    background-image: linear-gradient(to bottom, transparent, var(--bg-base,#0d0515) 60%);
-    -webkit-mask-image: linear-gradient(to top, transparent 30%, #4bb843 60%);
-    mask-image: linear-gradient(to top, transparent 30%, #4bb843 60%);
-    box-shadow: inset 1vmin 0 2vmin rgba(255,255,255,0.06);
-  }
-  .op-g-right--1 { animation: op-g-right-ans 2.5s linear infinite; }
-  .op-g-right--2 { left: 5vmin; transform: rotateY(-180deg); animation: op-g-right-ans-2 3s linear infinite; }
-  .op-g-right--2 .op-leaf { height: 75vmin; filter: blur(0.5vmin) brightness(0.65); opacity: 0.75; }
-  @keyframes op-g-right-ans { 0%, 100% { transform: rotate(20deg); } 50% { transform: rotate(24deg) rotateX(-20deg); } }
-  @keyframes op-g-right-ans-2 { 0%, 100% { transform: rotateY(-180deg) rotate(0deg) rotateX(-20deg); } 50% { transform: rotateY(-180deg) rotate(6deg) rotateX(-20deg); } }
-
-  .op-g-front {
-    position: absolute; bottom: 6vmin; left: 2.5vmin; z-index: 2;
-    transform-origin: bottom center; transform: rotate(-28deg) rotateY(30deg) scale(1.04);
-    animation: op-g-front-ans 2s linear infinite;
-  }
-  @keyframes op-g-front-ans { 0%, 100% { transform: rotate(-28deg) rotateY(30deg) scale(1.04); } 50% { transform: rotate(-35deg) rotateY(40deg) scale(1.04); } }
-  .op-g-front__line { width: 0.3vmin; height: 20vmin; background-image: linear-gradient(to top, transparent, #4bb843, transparent 100%); position: relative; }
-  .op-g-front__leaf-wrapper { position: absolute; top: 0; left: 0; transform-origin: bottom left; transform: rotate(10deg); }
-  .op-g-front__leaf-wrapper:nth-child(even) { left: 0vmin; transform: rotateY(-180deg) rotate(5deg); animation: op-g-front-leaf-left 1s ease-in backwards; }
-  .op-g-front__leaf-wrapper:nth-child(odd) { animation: op-g-front-leaf 1s ease-in backwards; }
-  .op-g-front__leaf-wrapper--1 { top: -8vmin; transform: scale(0.7); animation: op-g-front-leaf 1s 5.5s ease-in backwards !important; }
-  .op-g-front__leaf-wrapper--2 { top: -8vmin; transform: rotateY(-180deg) scale(0.7) !important; animation: op-g-front-leaf-left-2 1s 4.6s ease-in backwards !important; }
-  .op-g-front__leaf-wrapper--3 { top: -3vmin; animation: op-g-front-leaf 1s 4.6s ease-in backwards; }
-  .op-g-front__leaf-wrapper--4 { top: -3vmin; transform: rotateY(-180deg) scale(0.9) !important; animation: op-g-front-leaf-left-2 1s 4.6s ease-in backwards !important; }
-  @keyframes op-g-front-leaf-left-2 { 0% { transform: rotateY(-180deg) scale(0); } }
-  .op-g-front__leaf-wrapper--5, .op-g-front__leaf-wrapper--6 { top: 2vmin; }
-  .op-g-front__leaf-wrapper--7, .op-g-front__leaf-wrapper--8 { top: 6.5vmin; }
-  .op-g-front__leaf-wrapper--2 { animation-delay: 5.2s !important; }
-  .op-g-front__leaf-wrapper--3 { animation-delay: 4.9s !important; }
-  .op-g-front__leaf-wrapper--5 { animation-delay: 4.3s !important; }
-  .op-g-front__leaf-wrapper--6 { animation-delay: 4.1s !important; }
-  .op-g-front__leaf-wrapper--7 { animation-delay: 3.8s !important; }
-  .op-g-front__leaf-wrapper--8 { animation-delay: 3.5s !important; }
-  @keyframes op-g-front-leaf { 0% { transform: rotate(10deg) scale(0); } }
-  @keyframes op-g-front-leaf-left { 0% { transform: rotateY(-180deg) rotate(5deg) scale(0); } }
-  .op-g-front__leaf {
-    width: 10vmin; height: 10vmin;
-    border-radius: 100% 0% 0% 100% / 100% 100% 0% 0%;
-    box-shadow: inset 0 2px 1vmin rgba(255,255,255,0.2);
-    background-image: linear-gradient(to bottom left, transparent, var(--bg-base,#0d0515)), linear-gradient(to bottom right, #4bb843 50%, transparent 50%, transparent);
-    -webkit-mask-image: linear-gradient(to bottom right, #4bb843 50%, transparent 50%, transparent);
-    mask-image: linear-gradient(to bottom right, #4bb843 50%, transparent 50%, transparent);
-  }
-
-  .op-g-fr { position: absolute; bottom: -4vmin; left: 0; transform-origin: bottom left; z-index: 2; animation: op-g-fr-ans 2s linear infinite; }
-  @keyframes op-g-fr-ans { 0%, 100% { transform: rotate(2deg); } 50% { transform: rotate(4deg); } }
-  .op-g-fr .op-leaf {
-    width: 30vmin; height: 50vmin; border-top-left-radius: 100%; border-left: 2vmin solid #1d6e1a;
-    -webkit-mask-image: linear-gradient(to top, transparent 25%, #1d6e1a 50%);
-    mask-image: linear-gradient(to top, transparent 25%, #1d6e1a 50%);
-    position: relative; z-index: 1;
-  }
-  .op-g-fr__leaf {
-    position: absolute; top: 0; left: 0; width: 10vmin; height: 10vmin;
-    border-radius: 100% 0% 0% 100% / 100% 100% 0% 0%;
-    box-shadow: inset 0 2px 1vmin rgba(150,230,120,0.2);
-    background-image: linear-gradient(to bottom left, transparent, var(--bg-base,#0d0515) 98%), linear-gradient(to bottom right, #8fe07a 45%, transparent 50%, transparent);
-    -webkit-mask-image: linear-gradient(135deg, #2f8a2a 40%, transparent 50%, transparent);
-    mask-image: linear-gradient(135deg, #2f8a2a 40%, transparent 50%, transparent);
-  }
-  .op-g-fr__leaf--1 { left: 20vmin; transform: rotate(45deg); animation: op-g-fr-leaf-1 0.5s 5.2s linear backwards; }
-  @keyframes op-g-fr-leaf-1 { 0% { transform-origin: left; transform: rotate(45deg) scale(0); } }
-  .op-g-fr__leaf--2 { left: 12vmin; top: -7vmin; transform: rotate(25deg) rotateY(-180deg); animation: op-g-fr-leaf-6 0.5s 5s linear backwards; }
-  .op-g-fr__leaf--3 { left: 15vmin; top: 6vmin; transform: rotate(55deg); animation: op-g-fr-leaf-5 0.5s 4.8s linear backwards; }
-  .op-g-fr__leaf--4 { left: 6vmin; top: -2vmin; transform: rotate(25deg) rotateY(-180deg); animation: op-g-fr-leaf-6 0.5s 4.6s linear backwards; }
-  .op-g-fr__leaf--5 { left: 10vmin; top: 14vmin; transform: rotate(55deg); animation: op-g-fr-leaf-5 0.5s 4.4s linear backwards; }
-  @keyframes op-g-fr-leaf-5 { 0% { transform-origin: left; transform: rotate(55deg) scale(0); } }
-  .op-g-fr__leaf--6 { left: 0vmin; top: 6vmin; transform: rotate(25deg) rotateY(-180deg); animation: op-g-fr-leaf-6 0.5s 4.2s linear backwards; }
-  @keyframes op-g-fr-leaf-6 { 0% { transform-origin: right; transform: rotate(25deg) rotateY(-180deg) scale(0); } }
-  .op-g-fr__leaf--7 { left: 5vmin; top: 22vmin; transform: rotate(45deg); animation: op-g-fr-leaf-7 0.5s 4s linear backwards; }
-  @keyframes op-g-fr-leaf-7 { 0% { transform-origin: left; transform: rotate(45deg) scale(0); } }
-  .op-g-fr__leaf--8 { left: -4vmin; top: 15vmin; transform: rotate(15deg) rotateY(-180deg); animation: op-g-fr-leaf-8 0.5s 3.8s linear backwards; }
-  @keyframes op-g-fr-leaf-8 { 0% { transform-origin: right; transform: rotate(15deg) rotateY(-180deg) scale(0); } }
-
-  .op-long-g { position: absolute; bottom: 25vmin; left: -42vmin; transform-origin: bottom left; }
-  .op-long-g--1 { bottom: 0vmin; transform: scale(0.8) rotate(-5deg); }
-  .op-long-g--1 .op-leaf { mask-image: linear-gradient(to top, transparent 40%, #1d6e1a 80%) !important; -webkit-mask-image: linear-gradient(to top, transparent 40%, #1d6e1a 80%) !important; }
-  .op-long-g--1 .op-leaf--1 { --w: 5vmin; --h: 60vmin; left: -2vmin; transform: rotate(3deg) rotateY(-180deg); }
-  .op-long-g--2, .op-long-g--3 { bottom: -3vmin; left: -35vmin; transform-origin: center; transform: scale(0.6) rotateX(60deg); }
-  .op-long-g--2 .op-leaf, .op-long-g--3 .op-leaf { mask-image: linear-gradient(to top, transparent 50%, #1d6e1a 80%) !important; -webkit-mask-image: linear-gradient(to top, transparent 50%, #1d6e1a 80%) !important; }
-  .op-long-g--2 .op-leaf--1, .op-long-g--3 .op-leaf--1 { left: -1vmin; transform: rotateY(-180deg); }
-  .op-long-g--3 { left: -17vmin; bottom: 0vmin; }
-  .op-long-g--3 .op-leaf { mask-image: linear-gradient(to top, transparent 40%, #1d6e1a 80%) !important; -webkit-mask-image: linear-gradient(to top, transparent 40%, #1d6e1a 80%) !important; }
-  .op-long-g--4 { left: 25vmin; bottom: -3vmin; transform-origin: center; transform: scale(0.6) rotateX(60deg); }
-  .op-long-g--4 .op-leaf { mask-image: linear-gradient(to top, transparent 50%, #1d6e1a 80%) !important; -webkit-mask-image: linear-gradient(to top, transparent 50%, #1d6e1a 80%) !important; }
-  .op-long-g--5 { left: 42vmin; bottom: 0vmin; transform: scale(0.8) rotate(2deg); }
-  .op-long-g--6 { left: 0vmin; bottom: -20vmin; z-index: 2; filter: blur(0.6vmin) brightness(0.6); transform: scale(0.8) rotate(2deg); }
-  .op-long-g--7 { left: 35vmin; bottom: 20vmin; z-index: -1; filter: blur(0.7vmin) brightness(0.5); transform: scale(0.6) rotate(2deg); opacity: 0.6; }
-  .op-long-g .op-leaf {
-    --w: 15vmin; --h: 40vmin; --c: #3ea638;
-    position: absolute; bottom: 0; width: var(--w); height: var(--h);
-    border-top-left-radius: 100%; border-left: 2vmin solid var(--c);
-    -webkit-mask-image: linear-gradient(to top, transparent 20%, var(--bg-base,#0d0515));
-    mask-image: linear-gradient(to top, transparent 20%, var(--bg-base,#0d0515));
-    box-shadow: inset 0.5vmin 0 1vmin rgba(255,255,255,0.08);
-    transform-origin: bottom center;
-  }
-  .op-long-g .op-leaf--0 { left: 2vmin; animation: op-leaf-ans-1 4s linear infinite; }
-  .op-long-g .op-leaf--1 { --w: 5vmin; --h: 60vmin; animation: op-leaf-ans-1 4s linear infinite; }
-  .op-long-g .op-leaf--2 { --w: 10vmin; --h: 40vmin; left: -0.5vmin; bottom: 5vmin; transform-origin: bottom left; transform: rotateY(-180deg); animation: op-leaf-ans-2 3s linear infinite; }
-  .op-long-g .op-leaf--3 { --w: 5vmin; --h: 30vmin; left: -1vmin; bottom: 3.2vmin; transform-origin: bottom left; transform: rotate(-10deg) rotateY(-180deg); animation: op-leaf-ans-3 3s linear infinite; }
-  @keyframes op-leaf-ans-1 { 0%, 100% { transform: rotate(-5deg) scale(1); } 50% { transform: rotate(5deg) scale(1.1); } }
-  @keyframes op-leaf-ans-2 { 0%, 100% { transform: rotateY(-180deg) rotate(5deg); } 50% { transform: rotateY(-180deg) rotate(0deg) scale(1.1); } }
-  @keyframes op-leaf-ans-3 { 0%, 100% { transform: rotate(-10deg) rotateY(-180deg); } 50% { transform: rotate(-20deg) rotateY(-180deg); } }
 </style>
 
 <!-- Toast "Accomplissement obtenu !" façon Minecraft -->
@@ -706,141 +374,11 @@ const FLOWER_LIB = {
 };
 const flowerSet = FLOWER_LIB[month.flowerType] || FLOWER_LIB.lys;
 
-// ── Bouquet animé de l'écran d'ouverture (1 fleur = 1 mois), structure fidèle au CodePen ──
-// Couches séparées : les tiges (op-stems-layer, z-index 3, SOUS le papier) et les têtes de
-// fleurs (op-heads-layer, z-index 15, AU-DESSUS du papier) sont deux conteneurs DOM distincts,
-// pas juste un z-index sur un même bloc — la profondeur reste donc correcte même si la hauteur
-// des tiges change (compression pour beaucoup de mois, etc).
-const opStemsLayer = document.getElementById('op-stems-layer');
-const opHeadsLayer = document.getElementById('op-heads-layer');
-const opFlowersEl = document.getElementById('op-flowers');
-const opCount = Math.max(1, month.number);
-let opMaxDelay = 0;
-
-// Pseudo-aléatoire déterministe : même seed => toujours la même valeur (composition stable
-// d'un rechargement à l'autre, seule l'animation reste vivante).
+// Pseudo-aléatoire déterministe (composition stable d'un rechargement à l'autre)
 function detRand(seed) {
   const x = Math.sin(seed * 12.9898) * 43758.5453;
   return x - Math.floor(x);
 }
-
-// Au-delà de quelques fleurs, on resserre progressivement l'éventail pour rester lisible
-const compress = Math.min(1, 5 / opCount);
-
-for (let i = 0; i < opCount; i++) {
-  const posInFan = opCount === 1 ? 0 : (i / (opCount - 1)) - 0.5; // -0.5 à 0.5
-  const baseRot = posInFan * Math.min(50, 26 + opCount * 2) * compress;
-  const stemH = 46 + detRand(i * 13 + 1) * 16 + (i % 3) * 3; // vmin
-  const stemDelay = 0.3 + i * 0.3;
-  const bloomDelay = 1.1 + i * 0.3;
-  const petalColor = i % 2 === 0 ? 'c1' : 'c2';
-  const petalColor2 = i % 2 === 0 ? 'c2' : 'c1';
-  opMaxDelay = Math.max(opMaxDelay, bloomDelay + 2);
-  const swayAmt = 2 + detRand(i * 13 + 2) * 2;
-
-  // Ancrage propre à chaque fleur (pas un point unique + simple rotation) : léger décalage
-  // horizontal/vertical, différent pour chaque fleur, mais toutes convergent près du ruban.
-  const anchorLeftVmin = posInFan * (1.6 + opCount * 0.5) * compress + (detRand(i * 13 + 3) * 1.2 - 0.6);
-  const anchorBottomVmin = -1 + (i % 2 === 0 ? -0.6 : 0.5) + detRand(i * 13 + 4) * 0.5;
-
-  // ── Couche 1 : la tige (reste sous le papier) ──
-  const stemWrap = document.createElement('div');
-  stemWrap.className = 'op-flower-stem';
-  stemWrap.style.left = `calc(50% + ${anchorLeftVmin}vmin)`;
-  stemWrap.style.bottom = `${anchorBottomVmin}vmin`;
-  stemWrap.style.setProperty('--baseRot', baseRot + 'deg');
-  stemWrap.style.setProperty('--swayAmt', swayAmt + 'deg');
-  stemWrap.style.animation = 'op-sway 4s linear infinite';
-
-  const line = document.createElement('div');
-  line.className = 'op-line';
-  line.style.height = stemH + 'vmin';
-  line.style.animationDelay = stemDelay + 's';
-
-  const leafDelays = [stemDelay + 1.3, stemDelay + 1.1, stemDelay + 0.9, stemDelay + 0.7];
-  for (let li = 0; li < 4; li++) {
-    const isRight = li % 2 === 0;
-    const lf = document.createElement('div');
-    lf.className = 'op-line-leaf ' + (isRight ? 'op-line-leaf--r' : 'op-line-leaf--l');
-    lf.style.top = (12 + li * 12 + (detRand(i * 13 + 10 + li) * 5 - 2.5)) + '%';
-    lf.style.setProperty('--leafRot', ((isRight ? 70 : -70) + (detRand(i * 13 + 20 + li) * 10 - 5)) + 'deg');
-    lf.style.animation = (isRight ? 'op-leaf-right' : 'op-leaf-left') + ' 0.8s ' + leafDelays[li] + 's backwards';
-    line.appendChild(lf);
-  }
-  stemWrap.appendChild(line);
-  opStemsLayer.appendChild(stemWrap);
-
-  // ── Couche 2 : la tête de fleur (reste au-dessus du papier) ──
-  // Positionnée au même ancrage que sa tige, décalée de sa hauteur, avec un point de pivot
-  // (transform-origin) reporté exactement sur l'ancrage de la tige : elle tourne donc en
-  // parfaite synchro avec elle pendant le sway, comme si elle y était réellement attachée.
-  const headWrap = document.createElement('div');
-  headWrap.className = 'op-flower-head-wrap';
-  headWrap.style.left = `calc(50% + ${anchorLeftVmin}vmin)`;
-  headWrap.style.bottom = `calc(${anchorBottomVmin}vmin + ${stemH}vmin)`;
-  headWrap.style.transformOrigin = `50% calc(100% + ${stemH}vmin)`;
-  headWrap.style.setProperty('--baseRot', baseRot + 'deg');
-  headWrap.style.setProperty('--swayAmt', swayAmt + 'deg');
-  headWrap.style.animation = 'op-sway 4s linear infinite';
-
-  const leafs = document.createElement('div');
-  leafs.className = 'op-leafs';
-  leafs.style.position = 'absolute';
-  leafs.style.bottom = '0';
-  leafs.style.left = '0';
-  leafs.style.animationDelay = bloomDelay + 's';
-
-  [1, 2, 3, 4].forEach((n) => {
-    const petal = document.createElement('div');
-    petal.className = 'op-petal op-petal--' + n;
-    petal.style.setProperty('--pc', month.theme[petalColor]);
-    petal.style.setProperty('--pc2', month.theme[petalColor2]);
-    leafs.appendChild(petal);
-  });
-
-  const whiteCircle = document.createElement('div');
-  whiteCircle.className = 'op-white-circle';
-  leafs.appendChild(whiteCircle);
-
-  // 8 petites lumières qui montent depuis la fleur
-  for (let l = 0; l < 8; l++) {
-    const light = document.createElement('div');
-    light.className = 'op-light';
-    light.style.left = (detRand(i * 13 + 30 + l) * 12 - 6) + 'vmin';
-    light.style.background = `rgb(var(--${l % 2 === 0 ? petalColor : petalColor2}))`;
-    light.style.animationDelay = (bloomDelay + 0.3 + detRand(i * 13 + 40 + l) * 3.2) + 's';
-    leafs.appendChild(light);
-  }
-
-  headWrap.appendChild(leafs);
-  opHeadsLayer.appendChild(headWrap);
-}
-
-// Les 8 touffes "long-g" de fond, portées du CodePen (délais exacts de l'original)
-const LONG_G_DELAYS = [
-  [3, 2.2, 3.4, 3.6],
-  [3.6, 3.8, 4, 4.2],
-  [4, 4.2, 4.4, 4.6],
-  [4, 4.2, 3, 3.6],
-  [4, 4.2, 3, 3.6],
-  [4, 4.2, 3, 3.6],
-  [4.2, 4.4, 4.6, 4.8],
-  [3, 3.2, 3.5, 3.6]
-];
-LONG_G_DELAYS.forEach((delays, gi) => {
-  const longG = document.createElement('div');
-  longG.className = 'op-long-g op-long-g--' + gi;
-  delays.forEach((d, li) => {
-    const wrap = document.createElement('div');
-    wrap.className = 'op-grow-ans';
-    wrap.style.setProperty('--d', d + 's');
-    const leaf = document.createElement('div');
-    leaf.className = 'op-leaf op-leaf--' + li;
-    wrap.appendChild(leaf);
-    longG.appendChild(wrap);
-  });
-  opFlowersEl.appendChild(longG);
-});
 
 // Étoiles scintillantes en fond de l'écran d'ouverture
 const starsContainer = document.getElementById('opening-stars');
@@ -857,10 +395,19 @@ for (let i = 0; i < 40; i++) {
   starsContainer.appendChild(star);
 }
 
+// Petites lumières qui montent en fond, autour du tournesol
+const bgLightsContainer = document.getElementById('sf-bg-lights');
+for (let i = 0; i < 14; i++) {
+  const light = document.createElement('div');
+  light.className = 'sf-bg-light';
+  light.style.left = Math.round(detRand(i * 9 + 1) * 100) + '%';
+  light.style.animationDelay = (detRand(i * 9 + 2) * 4).toFixed(1) + 's';
+  bgLightsContainer.appendChild(light);
+}
+
 window.addEventListener('load', () => {
   const overlay = document.getElementById('opening-overlay');
-  const waitMs = Math.round((opMaxDelay + 0.6) * 1000);
-  setTimeout(() => { overlay.style.opacity = '0'; setTimeout(() => overlay.style.display = 'none', 1000); }, waitMs);
+  setTimeout(() => { overlay.style.opacity = '0'; setTimeout(() => overlay.style.display = 'none', 1000); }, 2600);
 });
 document.querySelectorAll('.deco-flower').forEach(g => g.innerHTML = flowerSet.big(g.dataset.color));
 document.querySelectorAll('.deco-flower-filled').forEach(g => g.innerHTML = flowerSet.filled(g.dataset.color));
