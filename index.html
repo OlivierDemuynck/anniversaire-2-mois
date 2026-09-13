@@ -415,7 +415,22 @@ function galleryHTML(month) {
   return `<div class="card"><div class="card-label">Nos photos</div><div class="gallery">${imgs}</div></div>`;
 }
 
+// Photos polaroid affichées sur les chapitres, une différente à chaque fois (cycle selon le mois).
+// Pour ajouter la photo "moustache avec ses cheveux" : mets le fichier dans /photos et ajoute une
+// ligne ici, ex: { src: 'photos/moustache.jpg', rot: 8, top: '8px', side: 'right:-8px' }
+const CHAPTER_PHOTOS = [
+  { src: 'photos/julie-peignoir.jpg', rot: 9, top: '6px', side: 'right:-8px' },
+  { src: 'photos/julie-soiree-1.jpg', rot: -7, top: '10px', side: 'right:-10px', h: '96px' },
+  { src: 'photos/moustache.jpg', rot: -8, top: '4px', side: 'right:-10px' },
+  { src: 'photos/julie-soiree-2.jpg', rot: 6, top: '4px', side: 'right:-6px', h: '150px' },
+  { src: 'photos/julie-filtre.jpg', rot: -9, top: '8px', side: 'right:-8px' }
+];
+function chapterPhoto(month) {
+  return CHAPTER_PHOTOS[(month.number - 1) % CHAPTER_PHOTOS.length];
+}
+
 function chapterHTML(month) {
+  const photo = chapterPhoto(month);
   const left = `
     <div class="book-page book-page-left">
       <div class="hero-flower-top">
@@ -434,7 +449,7 @@ function chapterHTML(month) {
         <div class="counter-number">${month.number}</div>
         <div class="counter-info"><div class="counter-label">mois ensemble</div><div class="counter-sub">${month.counterSub}</div></div>
       </div>
-      <div class="polaroid" style="top:6px; right:-8px; transform:rotate(9deg);"><img src="photos/julie-peignoir.jpg" alt="Julie"></div>
+      <div class="polaroid" style="top:${photo.top}; ${photo.side}; transform:rotate(${photo.rot}deg);"><img src="${photo.src}" alt="Julie"${photo.h ? ` style="height:${photo.h}"` : ''}></div>
       <div class="book-page-num">${String(month.number).padStart(2, '0')} — ${month.subtitle}</div>
     </div>`;
   const right = `
@@ -514,7 +529,7 @@ function chapterPageIndex(monthNumber) {
   return pages.findIndex(p => p.type === 'chapter' && p.month.number === monthNumber);
 }
 
-function renderPage(index, landOnRight) {
+function applyPageContent(index, landOnRight) {
   pageIndex = Math.max(0, Math.min(pages.length - 1, index));
   subPage = landOnRight ? 1 : 0;
   const page = pages[pageIndex];
@@ -527,7 +542,6 @@ function renderPage(index, landOnRight) {
     pageSpread.innerHTML = chapterHTML(page.month);
   }
   pageSpread.dataset.sub = String(subPage);
-  pageSpread.classList.remove('page-spread'); void pageSpread.offsetWidth; pageSpread.classList.add('page-spread'); // relance l'animation d'apparition
   window.scrollTo({ top: 0 });
 
   navPrev.disabled = pageIndex === 0 && subPage === 0;
@@ -547,13 +561,45 @@ function renderPage(index, landOnRight) {
   }
 }
 
+// Anime une "page qui tourne" : la page sortante pivote légèrement puis disparaît,
+// le contenu est remplacé, puis la nouvelle page pivote pour revenir à plat.
+function renderPage(index, landOnRight, direction) {
+  const dir = direction || (index >= pageIndex ? 'next' : 'prev');
+  pageSpread.classList.remove('turn-next-in', 'turn-prev-in');
+  pageSpread.classList.add(dir === 'next' ? 'turn-next-out' : 'turn-prev-out');
+  setTimeout(() => {
+    applyPageContent(index, landOnRight);
+    pageSpread.classList.remove('turn-next-out', 'turn-prev-out');
+    pageSpread.classList.add(dir === 'next' ? 'turn-next-in' : 'turn-prev-in');
+    setTimeout(() => pageSpread.classList.remove('turn-next-in', 'turn-prev-in'), 340);
+  }, 220);
+}
+
 function goNext() {
-  if (!isTwoColLayout() && subPage === 0) { subPage = 1; pageSpread.dataset.sub = '1'; window.scrollTo({ top: 0 }); navPrev.disabled = false; navNext.disabled = pageIndex === pages.length - 1; return; }
-  renderPage(pageIndex + 1);
+  if (!isTwoColLayout() && subPage === 0) {
+    pageSpread.classList.add('turn-next-out');
+    setTimeout(() => {
+      subPage = 1; pageSpread.dataset.sub = '1'; window.scrollTo({ top: 0 });
+      navPrev.disabled = false; navNext.disabled = pageIndex === pages.length - 1;
+      pageSpread.classList.remove('turn-next-out'); pageSpread.classList.add('turn-next-in');
+      setTimeout(() => pageSpread.classList.remove('turn-next-in'), 340);
+    }, 220);
+    return;
+  }
+  renderPage(pageIndex + 1, false, 'next');
 }
 function goPrev() {
-  if (!isTwoColLayout() && subPage === 1) { subPage = 0; pageSpread.dataset.sub = '0'; window.scrollTo({ top: 0 }); navNext.disabled = false; navPrev.disabled = pageIndex === 0; return; }
-  renderPage(pageIndex - 1, !isTwoColLayout());
+  if (!isTwoColLayout() && subPage === 1) {
+    pageSpread.classList.add('turn-prev-out');
+    setTimeout(() => {
+      subPage = 0; pageSpread.dataset.sub = '0'; window.scrollTo({ top: 0 });
+      navNext.disabled = false; navPrev.disabled = pageIndex === 0;
+      pageSpread.classList.remove('turn-prev-out'); pageSpread.classList.add('turn-prev-in');
+      setTimeout(() => pageSpread.classList.remove('turn-prev-in'), 340);
+    }, 220);
+    return;
+  }
+  renderPage(pageIndex - 1, !isTwoColLayout(), 'prev');
 }
 
 navPrev.addEventListener('click', goPrev);
