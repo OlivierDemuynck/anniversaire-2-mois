@@ -177,7 +177,6 @@ window.SITE_DATA = {
       secretMessage: "Le 24 sera la première fois que nos yeux se rencontreront vraiment,<br>mais crois-moi, l'idée de pouvoir enfin te serrer dans mes bras <br> me chamboule déjà...",
       photos: []
     },
-     months: [
     {
       number: 3,
       dateRange: "13 aout → 13 septembre 2026",
