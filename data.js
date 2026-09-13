@@ -176,7 +176,79 @@ window.SITE_DATA = {
       ],
       secretMessage: "Le 24 sera la première fois que nos yeux se rencontreront vraiment,<br>mais crois-moi, l'idée de pouvoir enfin te serrer dans mes bras <br> me chamboule déjà...",
       photos: []
-    }
+    },
+     months: [
+    {
+      number: 3,
+      dateRange: "13 aout → 13 septembre 2026",
+      subtitle: "90 jours déjà, à tes coté",
+      counterSub: "Encore loin d'etre les derniers",
+      theme: {
+        c1: "210,100,150",   // rose principal
+        c2: "160,90,210",    // violet secondaire
+        glow: "120,20,80",   // lueur de fond
+        bgBase: "#0d0515"    // fond de base (violet très sombre)
+      },
+      flowerType: "lys", // forme des fleurs déco : "lys" ou "tulipe"
+      poem: [
+        {
+          lines: [
+            "T'étais déjà là bien avant le premier mot,",
+            "Mon amie, ma confidente, mon tout.",
+            "On riait, on parlait, sans même le savoir,",
+            "Qu'on construisait quelque chose, doucement, le soir."
+          ]
+        },
+        {
+          special: true,
+          lines: [
+            "Et puis un soir, sans qu'on s'y attende,",
+            "T'es devenue la fille que j'attendais."
+          ]
+        },
+        {
+          lines: [
+            "T'es belle sans le savoir, naturelle et vraie,",
+            "Pas besoin de masque pour que tu m'éblouisses.",
+            "Juste toi, comme t'es, et c'est déjà parfait,",
+            "Ta façon d'être unique qui me rend complice."
+          ]
+        },
+        {
+          lines: [
+            "Je sais que la distance nous sépare,",
+            "Que les kilomètres pèsent parfois trop lourd.",
+            "Mais mon cœur, lui, il reste avec toi chaque jour,",
+            "Et aucune route ne peut effacer mon amour."
+          ]
+        },
+        {
+          special: true,
+          lines: [
+            "Douce, drôle, forte à ta façon,",
+            "T'es ma reine, ma fleur, ma raison."
+          ]
+        },
+        {
+          lines: [
+            "Alors ce soir, pour notre premier mois,",
+            "Je voulais juste que tu saches une chose :",
+            "Que même de loin, je pense encore à toi,",
+            "Et que je t'aime, follement, comme une rose."
+          ]
+        },
+        {
+          special: true,
+          lines: [
+            "Et moi je suis là, de loin je veille,",
+            "Follement amoureux de ma merveille."
+          ]
+        }
+      ],
+      secretMessage: "Peu importe la distance,<br>il y aura toujours un endroit<br>où je penserai à toi. ❤",
+      photos: [] // pas de photo pour le mois 1
+    },
+
   ]
 };
 
