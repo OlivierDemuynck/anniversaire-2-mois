@@ -178,18 +178,18 @@ window.SITE_DATA = {
       photos: []
     },
      
-    {
+{
       number: 3,
       dateRange: "13 aout → 13 septembre 2026",
-      subtitle: "90 jours déjà, à tes coté",
+      subtitle: "90 jours déjà, à tes côtés",
       counterSub: "Encore loin d'etre les derniers",
       theme: {
-        c1: "210,100,150",   // rose principal
-        c2: "160,90,210",    // violet secondaire
-        glow: "120,20,80",   // lueur de fond
-        bgBase: "#0d0515"    // fond de base (violet très sombre)
+        c1: "210,100,150",    // rose principal
+        c2: "160,90,210",     // violet secondaire
+        glow: "120,20,80",    // lueur de fond
+        bgBase: "#0d0515"     // fond de base (violet très sombre)
       },
-      flowerType: "lys", // forme des fleurs déco : "lys" ou "tulipe"
+      flowerType: "lys",
       poem: [
         {
           lines: [
@@ -231,7 +231,7 @@ window.SITE_DATA = {
         },
         {
           lines: [
-            "Alors ce soir, pour notre premier mois,",
+            "Alors ce soir, pour notre troisième mois,",
             "Je voulais juste que tu saches une chose :",
             "Que même de loin, je pense encore à toi,",
             "Et que je t'aime, follement, comme une rose."
@@ -246,7 +246,7 @@ window.SITE_DATA = {
         }
       ],
       secretMessage: "Peu importe la distance,<br>il y aura toujours un endroit<br>où je penserai à toi. ❤",
-      photos: [] // pas de photo pour le mois 1
+      photos: []
     }
   ]
 };
