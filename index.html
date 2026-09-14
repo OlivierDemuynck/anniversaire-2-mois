@@ -224,6 +224,14 @@
 <script src="data.js"></script>
 <script src="mc-toast.js"></script>
 <script>
+// Sécurité : le tournesol doit disparaître même si une erreur survient plus bas dans le script
+// (ex: une faute de syntaxe dans data.js) — ce bloc est volontairement tout en haut, avant tout le reste.
+window.addEventListener('load', () => {
+  const overlay = document.getElementById('opening-overlay');
+  setTimeout(() => { overlay.style.opacity = '0'; setTimeout(() => overlay.style.display = 'none', 1000); }, 2600);
+});
+
+try {
 const MONTHS = window.SITE_DATA.months;
 const params = new URLSearchParams(location.search);
 const requestedNum = parseInt(params.get('m'), 10);
@@ -355,11 +363,6 @@ for (let i = 0; i < 14; i++) {
   light.style.animationDelay = (detRand(i * 9 + 2) * 4).toFixed(1) + 's';
   bgLightsContainer.appendChild(light);
 }
-
-window.addEventListener('load', () => {
-  const overlay = document.getElementById('opening-overlay');
-  setTimeout(() => { overlay.style.opacity = '0'; setTimeout(() => overlay.style.display = 'none', 1000); }, 2600);
-});
 
 // Pétales — vraies formes SVG, taille/opacité variables
 const petalsContainer = document.getElementById('petals-container');
@@ -668,7 +671,9 @@ if (deepLinkedMonth) {
   bookOpen.classList.add('visible');
   renderPage(chapterPageIndex(deepLinkedMonth.number));
 }
+} catch (err) {
+  console.error('Erreur dans le script du livre (vérifie data.js) :', err);
+}
 </script>
 </body>
 </html>
-
