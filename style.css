@@ -367,7 +367,7 @@ body {
   }
 }
 .book-page {
-  position: relative; padding: 30px 22px 24px;
+  position: relative; padding: 50px 55px 40px;
   background:
     repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 3px),
     linear-gradient(160deg, #1c0f22 0%, var(--bg-base, #150a1a) 100%);
@@ -399,7 +399,21 @@ body {
 /* ── Page d'intro (garde) ── */
 .intro-eyebrow { font-family: 'Lato', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(var(--c1),0.75); }
 .intro-title { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 30px; margin: 10px 0 16px; color: rgba(255,235,245,0.95); }
-.intro-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; line-height: 1.8; color: rgba(230,210,225,0.85); }
+.intro-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  line-height: 1.85;
+  color: rgba(230,210,225,0.85);
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.intro-text p { margin: 0 0 22px; }
+.intro-text p:last-child { margin-bottom: 0; }
+.intro-text strong { color: rgba(255,235,245,0.98); font-weight: 600; }
+.intro-ending { margin-top: 30px !important; text-align: center; font-style: italic; }
+.intro-welcome { margin-top: 32px !important; text-align: center; font-size: 22px; color: rgba(var(--c1),0.95); letter-spacing: 1px; }
 .intro-cta {
   display: inline-block; margin-top: 24px; font-family: 'Cormorant Garamond', serif; font-style: italic;
   font-size: 15px; color: rgba(var(--c1),0.95); text-decoration: none;
@@ -421,3 +435,11 @@ body {
 .toc-item-date { font-family: 'Lato', sans-serif; font-size: 10px; color: rgba(200,180,195,0.55); margin-top: 2px; }
 .toc-links { margin-top: 26px; display: flex; flex-direction: column; gap: 10px; }
 .toc-links a { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: rgba(var(--c2),0.9); }
+
+
+/* ── Texte d'introduction : lecture confortable sur mobile ── */
+@media (max-width: 600px) {
+  .book-page { padding: 35px 25px 30px; }
+  .intro-text { font-size: 16px; line-height: 1.8; }
+  .intro-text p { margin-bottom: 20px; }
+}
