@@ -215,5 +215,6 @@ window.TIMELINE_DATA = [
   { date: "17 février 2025", icon: "🫂", title: "Meilleurs amis", description: "Ce soir là je t'ai annoncé que pour moi tu étais ma meilleure amie" },
   { date: "28 février 2026", icon: "😍", title: "Premier face reveal sans filtre", description: "La première photo que j'ai reçu de toi sans filtre (avec Zoé derrière) et juste WOOOOOW c'est un canon" },
   { date: "6 mai 2026", icon: "😳", title: "Premier \"je t'aime\"", description: "Ce soir là tu as fait un craquage pour de la physique chimie, et tu m'a dit je t'aime.. Ça m'a tellement fait fondre et ça continue de le faire encore et encore.." },
-  { date: "13 juin 2026", icon: "💕", title: "Officiellement ensemble", description: "Le jour où le déni a pris fin des deux côtés lors de notre premier sleepcall" }
+  { date: "13 juin 2026", icon: "💕", title: "Officiellement ensemble", description: "Le jour où le déni a pris fin des deux côtés lors de notre premier sleepcall" },
+  { date: "24 août 2026", icon: "🤭", title: "LA RENCONTREEE", description: "Ce jour fut notre premier (mais pas dernière) rencontre mais aussi nos premiers calin bisous et meme + encore 🤭" }
 ];
