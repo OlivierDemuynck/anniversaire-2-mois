@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1a0a2e">
-<title>Notre histoire d'amour</title>
+<title>Pour toi, mon cœur 🌸</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400&family=Press+Start+2P&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -191,9 +191,9 @@
     <svg class="book-cover-flower" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       <g class="deco-flower-hero" data-color="c1" transform="translate(-50,10) scale(0.9)"></g>
     </svg>
-    <div class="book-title">A nos souvenir d'amoureux</div>
+    <div class="book-title">Notre histoire</div>
     <div class="book-cover-rule"></div>
-    <div class="book-subtitle">L'histoire de notre amour</div>
+    <div class="book-subtitle">à nous deux</div>
   </div>
   <button class="discover-btn" id="discover-btn">Découvrir notre histoire</button>
 </div>
@@ -203,7 +203,7 @@
   <div class="book-toolbar">
     <button id="nav-toc-btn">✦ Sommaire ✦</button>
     <span class="sep">·</span>
-    <a href="chronologie.html">Notre chronologie</a>
+    <a href="chronologie.html">notre chronologie</a>
   </div>
   <div class="book-frame">
     <button class="book-nav-btn" id="nav-prev" aria-label="page précédente">←</button>
@@ -446,10 +446,10 @@ function chapterHTML(month) {
       <div class="hero-date">${month.dateRange}</div>
       <div class="hero-month">${month.number} mois</div>
       <div class="hero-subtitle">${month.subtitle}</div>
-      <div class="hero-name">Pour TOIII ma chérie d'amouuur ❤️</div>
+      <div class="hero-name">Pour mon amoureuse d'amour 🌸</div>
       <div class="sep" style="margin-top:16px"><div class="sep-line"></div><span style="color:rgba(200,80,130,0.5);font-size:10px">♥</span><div class="sep-line"></div></div>
       <div class="counter-card" style="margin-top:22px">
-        <div class="counter-number">${month.number}</div>
+        <div class="counter-number" id="counter-number-val">${month.number}</div>
         <div class="counter-info"><div class="counter-label">mois ensemble</div><div class="counter-sub">${month.counterSub}</div></div>
       </div>
       <div class="polaroid" style="top:${photo.top}; ${photo.side}; transform:rotate(${photo.rot}deg);"><img src="${photo.src}" alt="Julie"${photo.h ? ` style="height:${photo.h}"` : ''}></div>
@@ -460,6 +460,7 @@ function chapterHTML(month) {
       <div class="card">
         <svg class="card-flower-bg" style="right:-20px;bottom:-20px;width:160px;height:160px" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g class="deco-flower-watermark" data-color="c1"></g></svg>
         <div class="card-label">Un poème pour toi</div>
+        <button class="poem-audio-btn" id="poem-audio-btn" data-month="${month.number}" hidden>🎧 Écouter le poème</button>
         <div class="poem">${poemHTML(month)}</div>
       </div>
       ${galleryHTML(month)}
@@ -482,51 +483,7 @@ function introHTML() {
     <div class="book-page book-page-left">
       <div class="intro-eyebrow">${MONTHS[0].dateRange.split('→')[0].trim() || 'le début'}</div>
       <div class="intro-title">Tout a commencé ici…</div>
-      <div class="intro-text">
-
-      <p>
-        Une histoire qui a démarré derrière un écran, entre deux personnes qui ne savaient pas encore tout ce que l'autre allait représenter.
-      </p>
-
-      <p>
-        Un soir d'octobre 2023, quelques messages ont suffi pour créer un lien.
-        D'abord une amitié, puis une complicité qui n'a cessé de grandir avec le temps.
-        Des discussions jusqu'au bout de la nuit, des appels, des rires, des confidences,
-        des moments où l'on s'est soutenus sans même réaliser à quel point ils comptaient
-        et nous rapprochaient l'un de l'autre.
-      </p>
-
-       <p>
-        Et puis, petit à petit, notre histoire a changé.
-       </p>
-
-      <p>
-        Ce qui était autrefois une simple amitié très forte s'est transformé en quelque chose
-        d'encore plus fort : des sentiments, des habitudes, des petites pensées pour l'autre,
-        des petits mots doux... jusqu'au jour où nous sommes devenus <strong>NOUS.</strong>
-      </p>
-
-    <p>
-        Depuis ce jour, chaque journée ajoute une nouvelle page à notre histoire et
-        <strong>CE LIVRE</strong> est là pour garder ces beaux souvenirs et nous les remémorer
-        autant que nous le souhaitons, comme si nous pouvions les revivre.
-    </p>
-
-    <p>
-        Ce livre est là pour n'oublier aucun petit détail de ces moments, de nos fous rires,
-        de nos « je t'aime », de nos appels qui durent encore et encore...
-        Toutes ces choses qui font que notre histoire est unique et surtout, <strong>la NÔTRE.</strong>
-    </p>
-
-    <p class="intro-ending">
-        Et surtout, ce n'est que le début de cette histoire qui ne risque pas de finir.
-    </p>
-
-    <p class="intro-welcome">
-        Bienvenue dans <strong>NOTRE HISTOIRE.</strong>
-    </p>
-
-  </div>
+      <div class="intro-text">Une histoire qui a démarré derrière un écran, et qui n'a jamais cessé de grandir depuis.</div>
       <div class="book-page-num">page de garde</div>
     </div>
     <div class="book-page book-page-right">
@@ -605,12 +562,83 @@ function applyPageContent(index, landOnRight) {
   }
   if (page.type === 'chapter') {
     showAchievementToast('❤️', 'Accomplissement obtenu !', page.month.number + ' mois parcourus', 400);
+    animateCounter(page.month.number);
+    setupPoemAudio(page.month.number);
   }
 }
+
+// Compteur "X mois" : le vrai chiffre est déjà dans le HTML (sécurité), on l'anime depuis 0.
+function animateCounter(target) {
+  const el = document.getElementById('counter-number-val');
+  if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  el.textContent = '0';
+  const duration = 700 + target * 60, start = performance.now();
+  function tick(now) {
+    const t = Math.min(1, (now - start) / duration);
+    el.textContent = Math.round((1 - Math.pow(1 - t, 3)) * target);
+    if (t < 1) requestAnimationFrame(tick); else el.textContent = target;
+  }
+  requestAnimationFrame(tick);
+}
+
+// Audio du poème : le bouton n'apparaît que si audio/poeme-N.mp3 existe
+let poemAudio = null;
+function stopPoemAudio() { if (poemAudio) { poemAudio.pause(); poemAudio = null; } }
+function setupPoemAudio(n) {
+  stopPoemAudio();
+  const btn = document.getElementById('poem-audio-btn');
+  if (!btn) return;
+  const a = new Audio('audio/poeme-' + n + '.mp3');
+  a.preload = 'metadata';
+  a.addEventListener('loadedmetadata', () => { btn.hidden = false; });
+  a.addEventListener('ended', () => { btn.textContent = '🎧 Écouter le poème'; });
+  btn.onclick = () => {
+    if (a.paused) { a.play(); btn.textContent = '⏸ Pause'; }
+    else { a.pause(); btn.textContent = '🎧 Écouter le poème'; }
+  };
+  poemAudio = a;
+}
+
+// Easter egg sonore (audio/gay.mp3, optionnel : silencieux si le fichier n'existe pas)
+function playSecretSound() {
+  try { const a = new Audio('audio/gay.mp3'); a.volume = 0.9; a.play().catch(() => {}); } catch (e) {}
+}
+
+// Petites étincelles au clic sur le bouton secret
+function burstSparks(x, y) {
+  for (let i = 0; i < 14; i++) {
+    const sp = document.createElement('div');
+    sp.className = 'spark';
+    const a = (Math.PI * 2 * i) / 14 + Math.random() * 0.4, d = 30 + Math.random() * 40;
+    sp.style.left = x + 'px'; sp.style.top = y + 'px';
+    sp.style.setProperty('--dx', Math.cos(a) * d + 'px');
+    sp.style.setProperty('--dy', Math.sin(a) * d + 'px');
+    document.body.appendChild(sp);
+    setTimeout(() => sp.remove(), 900);
+  }
+}
+
+// Papillons discrets en arrière-plan
+(function () {
+  const layer = document.createElement('div');
+  layer.id = 'butterfly-layer';
+  for (let i = 0; i < 4; i++) {
+    const b = document.createElement('div');
+    b.className = 'butterfly';
+    b.style.setProperty('--top', (12 + i * 20) + '%');
+    b.style.setProperty('--dur', (28 + i * 7) + 's');
+    b.style.setProperty('--delay', (-i * 9) + 's');
+    b.style.setProperty('--sc', (0.7 + (i % 2) * 0.35));
+    b.innerHTML = '<span class="wing wing-l"></span><span class="wing wing-r"></span>';
+    layer.appendChild(b);
+  }
+  document.body.appendChild(layer);
+})();
 
 // Anime une "page qui tourne" : la page sortante pivote légèrement puis disparaît,
 // le contenu est remplacé, puis la nouvelle page pivote pour revenir à plat.
 function renderPage(index, landOnRight, direction) {
+  stopPoemAudio();
   const dir = direction || (index >= pageIndex ? 'next' : 'prev');
   pageSpread.classList.remove('turn-next-in', 'turn-prev-in');
   pageSpread.classList.add(dir === 'next' ? 'turn-next-out' : 'turn-prev-out');
@@ -659,6 +687,9 @@ pageSpread.addEventListener('click', (e) => {
   if (!btn) return;
   const msg = btn.nextElementSibling;
   msg.innerHTML = decodeURIComponent(btn.dataset.secret);
+  const r = btn.getBoundingClientRect();
+  burstSparks(r.left + r.width / 2, r.top + r.height / 2);
+  playSecretSound();
   btn.style.display = 'none';
   msg.classList.add('visible');
 });
@@ -721,3 +752,4 @@ if (deepLinkedMonth) {
 </script>
 </body>
 </html>
+
