@@ -349,10 +349,10 @@ body {
 .page-spread.turn-next-in  { animation: turnNextIn 0.32s ease forwards; }
 .page-spread.turn-prev-out { animation: turnPrevOut 0.22s ease forwards; }
 .page-spread.turn-prev-in  { animation: turnPrevIn 0.32s ease forwards; }
-@keyframes turnNextOut { to { transform: rotateY(-18deg) scale(0.96); opacity: 0.35; } }
-@keyframes turnNextIn  { from { transform: rotateY(18deg) scale(0.96); opacity: 0.35; } to { transform: rotateY(0) scale(1); opacity: 1; } }
-@keyframes turnPrevOut { to { transform: rotateY(18deg) scale(0.96); opacity: 0.35; } }
-@keyframes turnPrevIn  { from { transform: rotateY(-18deg) scale(0.96); opacity: 0.35; } to { transform: rotateY(0) scale(1); opacity: 1; } }
+@keyframes turnNextOut { to { transform: rotateY(-22deg) translateX(-14px) scale(0.96); opacity: 0.2; } }
+@keyframes turnNextIn  { from { transform: rotateY(22deg) translateX(14px) scale(0.96); opacity: 0.2; } to { transform: rotateY(0) scale(1); opacity: 1; } }
+@keyframes turnPrevOut { to { transform: rotateY(22deg) translateX(14px) scale(0.96); opacity: 0.2; } }
+@keyframes turnPrevIn  { from { transform: rotateY(-22deg) translateX(-14px) scale(0.96); opacity: 0.2; } to { transform: rotateY(0) scale(1); opacity: 1; } }
 /* Mobile : une seule demi-page visible à la fois, comme un livre qu'on feuillette */
 .page-spread[data-sub="0"] .book-page-right { display: none; }
 .page-spread[data-sub="1"] .book-page-left { display: none; }
@@ -367,7 +367,7 @@ body {
   }
 }
 .book-page {
-  position: relative; padding: 50px 55px 40px;
+  position: relative; padding: 30px 22px 24px;
   background:
     repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 3px),
     linear-gradient(160deg, #1c0f22 0%, var(--bg-base, #150a1a) 100%);
@@ -399,21 +399,7 @@ body {
 /* ── Page d'intro (garde) ── */
 .intro-eyebrow { font-family: 'Lato', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(var(--c1),0.75); }
 .intro-title { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 30px; margin: 10px 0 16px; color: rgba(255,235,245,0.95); }
-.intro-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 17px;
-  line-height: 1.85;
-  color: rgba(230,210,225,0.85);
-  max-width: 680px;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.intro-text p { margin: 0 0 22px; }
-.intro-text p:last-child { margin-bottom: 0; }
-.intro-text strong { color: rgba(255,235,245,0.98); font-weight: 600; }
-.intro-ending { margin-top: 30px !important; text-align: center; font-style: italic; }
-.intro-welcome { margin-top: 32px !important; text-align: center; font-size: 22px; color: rgba(var(--c1),0.95); letter-spacing: 1px; }
+.intro-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; line-height: 1.8; color: rgba(230,210,225,0.85); }
 .intro-cta {
   display: inline-block; margin-top: 24px; font-family: 'Cormorant Garamond', serif; font-style: italic;
   font-size: 15px; color: rgba(var(--c1),0.95); text-decoration: none;
@@ -436,10 +422,25 @@ body {
 .toc-links { margin-top: 26px; display: flex; flex-direction: column; gap: 10px; }
 .toc-links a { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: rgba(var(--c2),0.9); }
 
+/* ===== Animations discrètes ===== */
+.spark { position: fixed; width: 6px; height: 6px; border-radius: 50%; pointer-events: none; z-index: 9999;
+  background: rgb(var(--c2, 255,200,80)); box-shadow: 0 0 8px rgba(var(--c1, 255,200,80), .9);
+  transform: translate(-50%,-50%); animation: sparkOut .85s ease-out forwards; }
+@keyframes sparkOut { to { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0); opacity: 0; } }
+#butterfly-layer { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+.butterfly { position: absolute; top: var(--top); left: -40px; width: 22px; height: 16px; opacity: .55;
+  animation: bflyX var(--dur) linear var(--delay) infinite, bflyY 6s ease-in-out var(--delay) infinite; }
+.butterfly .wing { position: absolute; top: 0; width: 11px; height: 15px; background: rgba(var(--c2, 255,200,80), .85);
+  border-radius: 80% 20% 70% 30%; animation: flap .5s ease-in-out infinite alternate; transform: scale(var(--sc)); }
+.wing-l { left: 0; transform-origin: right center; }
+.wing-r { right: 0; transform-origin: left center; border-radius: 20% 80% 30% 70%; }
+@keyframes bflyX { from { left: -40px; } to { left: calc(100% + 40px); } }
+@keyframes bflyY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-40px); } }
+@keyframes flap { from { transform: scaleX(1); } to { transform: scaleX(.3); } }
+@media (prefers-reduced-motion: reduce) { #butterfly-layer { display: none; } }
 
-/* ── Texte d'introduction : lecture confortable sur mobile ── */
-@media (max-width: 600px) {
-  .book-page { padding: 35px 25px 30px; }
-  .intro-text { font-size: 16px; line-height: 1.8; }
-  .intro-text p { margin-bottom: 20px; }
-}
+.poem-audio-btn { display: block; margin: 0 auto 14px; padding: 7px 16px; border-radius: 20px; cursor: pointer;
+  font-family: 'Cormorant Garamond', serif; font-size: 15px; color: rgba(255,240,245,.95);
+  background: rgba(var(--c1), .18); border: 1px solid rgba(var(--c1), .6); transition: background .2s; }
+.poem-audio-btn:hover { background: rgba(var(--c1), .35); }
+.poem-audio-btn[hidden] { display: none; }
