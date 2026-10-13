@@ -199,7 +199,7 @@ window.SITE_DATA = {
         { lines: [
             "Quatre mois se sont écoulés,",
             "Quatre mois à tes côtés,",
-            "Et pourtant, quand je pense à nous,"
+            "Et pourtant, quand je pense à nous,",
             "J'ai l'impression que ça fait bien plus que tout."
           ] },
         { special: true, lines: [
