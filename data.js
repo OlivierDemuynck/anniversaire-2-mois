@@ -193,7 +193,71 @@ window.SITE_DATA = {
       ],
       secretMessage: "Peu importe la distance,<br>il y aura toujours un endroit<br>où je penserai à toi. ❤",
       photos: []
-    }
+    },
+         {
+      number: 4,
+      dateRange: "13 septembre → 13 octobre 2026",
+      subtitle: "4 mois a tes cotés..",
+      counterSub: "Et pourtant l'impression que mon coeur te connais depuis toujours",
+      theme: {
+        c1: "215,45,55",
+        c2: "225,150,60",
+        glow: "130,15,25",
+        bgBase: "#12070a"
+      },
+      flowerType: "tulipe",
+      poem: [
+        { lines: [
+            "Mon amour, depuis que je suis avec toi, je me sens comme un Roi,",
+            "L'élu de ton cœur mais aussi ton plus grand admirateur,",
+            "T'es la meilleure des copines, je veux finir ma vie avec toi."
+          ] },
+        { special: true, lines: [
+            "Avant toi, j'avançais sans trop savoir où aller,",
+            "Aujourd'hui j'ai trouvé ma destinée et elle est à tes côtés,",
+            "Il n'y a aucun doute, je sais où je veux aller,",
+            "Et c'est dans tes bras que je veux me reposer."
+          ] },
+        { lines: [
+            "Deux mois déjà que nous sommes ensemble,",
+            "Deux mois où le temps semble s'être arrêté,",
+            "Dans ces nuits trop courtes où nos mots d'amoureux se confondent,",
+            "La distance est là, lourde et souvent pesante,",
+            "Mais notre complicité la rend presque impuissante."
+          ] },
+        { special: true, lines: [
+            "On s'appelle, on rigole, on refait tout le monde,",
+            "Et plus le temps passe, plus mon amour abonde.",
+            "Tu es devenue ma source de bonheur,",
+            "Celle qui suffit à illuminer mes heures."
+          ] },
+        { lines: [
+            "Mon refuge secret quand le monde est trop lourd,",
+            "Ma personne préférée, mon repère de toujours.",
+            "T'es mon quotidien, ma pensée au réveil,",
+            "Celle qui fait briller mes nuits même quand je n'ai pas sommeil."
+          ] },
+        { special: true, lines: [
+            "Et bientôt viendra enfin ce fameux 24 août,",
+            "Ce jour où la distance s'effacera entre nous.",
+            "Après tant d'attente, de kilomètres et de détours,",
+            "Je pourrai enfin te serrer très fort, ma Julie d'amour."
+          ] },
+        { lines: [
+            "Poser mes yeux sur toi pour la première fois, sentir ton souffle, ta peau,",
+            "Et te dire en face à quel point tu es belle, qu'être avec toi, ça m'émerveille."
+          ] },
+        { special: true, lines: [
+            "Deux mois seulement, et pourtant tant de souvenirs,",
+            "Tant de choses vécues, tant d'autres à construire.",
+            "Ce n'est que le tout début de notre grande histoire,",
+            "Si aujourd'hui mon cœur bat pour toi comme un fou,",
+            "J'ai hâte d'être à demain pour t'aimer par-dessus tout"
+          ] }
+      ],
+      secretMessage: "Le 24 sera la première fois que nos yeux se rencontreront vraiment,<br>mais crois-moi, l'idée de pouvoir enfin te serrer dans mes bras <br> me chamboule déjà...",
+      photos: []
+    },
   ]
 };
 
