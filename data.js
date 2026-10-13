@@ -178,16 +178,9 @@ window.SITE_DATA = {
             "C'est cette envie devorante de poser ma main dans ta main",
             "C'est de sentir ta présence,ta douceur,ton odeur,",
             "Et de laisser nos deux corps caler le même rythme de coeur"
-          ] },
-        { special: true, lines: [
-            "Le 26 jamais semblé aussi loin et si proche a la fois,",
-            "Mais sache qu'à la seconde où je serai face a toi...",
-            "Je te sauterai dessus et te devorrerai mon amour,",
-            "Te combler de baiser passioner, pour que tout ses jours d'attente soit rattraper",
-            ""
           ] }
       ],
-      secretMessage: "Le 26 jamais semblé aussi loin et si proche a la fois,<br>à la seconde où je serai face a toi<br>Je te sauterai dessus pour te devorrer<br>et Te combler de baiser passioner, pour que tout ses jours d'attente soit rattraper❤",
+      secretMessage: "Le 26 n'a jamais semblé aussi loin et si proche a la fois,<br>à la seconde où je serai face a toi<br>Je te sauterai dessus pour te devorrer<br>et te combler de baiser passioner, pour que tout ses jours d'attente soit rattraper❤",
       photos: []
     },
          {
