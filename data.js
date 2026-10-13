@@ -200,12 +200,12 @@ window.SITE_DATA = {
       subtitle: "4 mois a tes cotés..",
       counterSub: "Et pourtant l'impression que mon coeur te connais depuis toujours",
       theme: {
-        c1: "215,45,55",
-        c2: "225,150,60",
-        glow: "130,15,25",
-        bgBase: "#12070a"
+        c1: "240,220,195",
+        c2: "195,100,55",
+        glow: "120,70,40",
+        bgBase: "#140c08"
       },
-      flowerType: "tulipe",
+      flowerType: "lys",
       poem: [
         { lines: [
             "Mon amour, depuis que je suis avec toi, je me sens comme un Roi,",
