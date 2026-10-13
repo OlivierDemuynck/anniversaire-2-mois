@@ -197,54 +197,58 @@ window.SITE_DATA = {
       flowerType: "lys",
       poem: [
         { lines: [
-            "Mon amour, depuis que je suis avec toi, je me sens comme un Roi,",
-            "L'élu de ton cœur mais aussi ton plus grand admirateur,",
-            "T'es la meilleure des copines, je veux finir ma vie avec toi."
+            "Quatre mois se sont écoulés,",
+            "Quatre mois à tes côtés,",
+            "Et pourtant, quand je pense à nous,"
+            "J'ai l'impression que ça fait bien plus que tout."
           ] },
         { special: true, lines: [
-            "Avant toi, j'avançais sans trop savoir où aller,",
-            "Aujourd'hui j'ai trouvé ma destinée et elle est à tes côtés,",
-            "Il n'y a aucun doute, je sais où je veux aller,",
-            "Et c'est dans tes bras que je veux me reposer."
+            "Car avant d'être ton amoureux,",
+            "J'étais déjà heureux d'être près de toi,",
+            "Et sans même connaître la suite de nous deux,",
+            "Tu prenais déjà une place immense en moi."
           ] },
         { lines: [
-            "Deux mois déjà que nous sommes ensemble,",
-            "Deux mois où le temps semble s'être arrêté,",
-            "Dans ces nuits trop courtes où nos mots d'amoureux se confondent,",
-            "La distance est là, lourde et souvent pesante,",
-            "Mais notre complicité la rend presque impuissante."
+            "Puis un jour, nos cœurs se sont rapprochés,",
+            "Et quelque chose en moi a changé.",
+            "Ce qui n'était qu'un rêve au fond de mes pensées",
+            "Est devenu réalité et mon bohneur a tes cotés ne fait qu'augmenté.."
           ] },
         { special: true, lines: [
-            "On s'appelle, on rigole, on refait tout le monde,",
-            "Et plus le temps passe, plus mon amour abonde.",
-            "Tu es devenue ma source de bonheur,",
-            "Celle qui suffit à illuminer mes heures."
+            "Depuis, chaque instant a sa valeur,",
+            "Chaque appel, chaque sourire, chaque heure.",
+            "Même lorsque la distance nous sépare,",
+            "Mon cœur, lui, ne perd jamais ton regard.."
           ] },
         { lines: [
-            "Mon refuge secret quand le monde est trop lourd,",
-            "Ma personne préférée, mon repère de toujours.",
-            "T'es mon quotidien, ma pensée au réveil,",
-            "Celle qui fait briller mes nuits même quand je n'ai pas sommeil."
+            "Je ne sais pas ce que demain nous réserve,",
+            "Ni combien de chemins la vie nous conserve,",
+            "Mais je sais qu'aujourd'hui et pour toujours, parmi tous les choix,",
+            "C'est toi et toujours toi que mon cœur voit et choisira."
           ] },
         { special: true, lines: [
-            "Et bientôt viendra enfin ce fameux 24 août,",
-            "Ce jour où la distance s'effacera entre nous.",
-            "Après tant d'attente, de kilomètres et de détours,",
-            "Je pourrai enfin te serrer très fort, ma Julie d'amour."
+            "Alors pour ces quatre mois, mon amour,",
+            "Je ne te promets pas seulement de beaux jours.",
+            "Je te promets de continuer à te choisir et te cherir, encore et encore,",
+            "D'apprendre avec toi, de grandir, de construire, de tout faire avec toi."
           ] },
         { lines: [
-            "Poser mes yeux sur toi pour la première fois, sentir ton souffle, ta peau,",
-            "Et te dire en face à quel point tu es belle, qu'être avec toi, ça m'émerveille."
+            "Et si quatre mois me semblent déjà etre passé comme une années,",
+            "C'est peut-être parce qu'avec toi, j'ai trouvé",
+            "Non pas quelqu'un avec qui compter les jours,",
+            "Mais quelqu'un avec qui je veux vis et recent le vrai amour.",
+            "Inutile de chercher, car je t'ai trouvé,",
+            "Ma julie chérie, ma moitié"
           ] },
         { special: true, lines: [
-            "Deux mois seulement, et pourtant tant de souvenirs,",
-            "Tant de choses vécues, tant d'autres à construire.",
-            "Ce n'est que le tout début de notre grande histoire,",
-            "Si aujourd'hui mon cœur bat pour toi comme un fou,",
-            "J'ai hâte d'être à demain pour t'aimer par-dessus tout"
+            "Joyeux quatre mois, mon petit ange,",
+            "Que le temps passe et que rien ne nous change..",
+            "Aujourd'hui, demain, et les jours à venir,",
+            "Il y aura tant de souvenirs,",
+            "Et c'est avec toi que je veut les écrires"
           ] }
       ],
-      secretMessage: "Le 24 sera la première fois que nos yeux se rencontreront vraiment,<br>mais crois-moi, l'idée de pouvoir enfin te serrer dans mes bras <br> me chamboule déjà...",
+      secretMessage: "Julie, je ne le dit pas et ne le dirai jamais assez<br>je t'aime tellement..<br>Je t'aime plus que tout les mots ne savent et ne seront le dire<br>Alors laisse moi te le montrer par des geste et laisse moi te cherie jusqu'a l'eternité ❤",
       photos: []
     },
   ]
