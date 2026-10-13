@@ -250,7 +250,7 @@ window.SITE_DATA = {
       ],
       secretMessage: "Julie, je ne le dit pas et ne le dirai jamais assez<br>je t'aime tellement..<br>Je t'aime plus que tout les mots ne savent et ne seront le dire<br>Alors laisse moi te le montrer par des geste et laisse moi te cherie jusqu'a l'eternité ❤",
       photos: []
-    },
+    }
   ]
 };
 
